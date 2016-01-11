@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 
 import org.w3c.dom.Document;
 
+import com.mxgraph.analysis.mxAnalysisGraph;
 import com.mxgraph.io.mxCodec;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
@@ -34,6 +35,8 @@ import com.mxgraph.view.mxGraph;
 import components.BasicGraphEditor;
 import components.EditorMenuBar;
 import components.EditorPalette;
+import components.EditorMenuBar.AnalyzeGraph;
+import components.EditorMenuBar.AnalyzeType;
 
 public class GraphEditor extends BasicGraphEditor
 {
@@ -468,5 +471,6 @@ public class GraphEditor extends BasicGraphEditor
 
 		GraphEditor editor = new GraphEditor();
 		editor.createFrame(new EditorMenuBar(editor)).setVisible(true);
+		
 	}
 }
