@@ -11,7 +11,7 @@
 	<add as="defaultEdge">
 		<add as="shape" value="connector"/>
 		<add as="labelBackgroundColor" value="white"/>
-		<add as="endArrow" value="classic"/>
+		<add as="endArrow" value="none"/>
 		<add as="fontSize" value="10"/>
 		<add as="align" value="center"/>
 		<add as="verticalAlign" value="middle"/>
@@ -25,7 +25,7 @@
 	</add>
 	<add as="straight">
 		<add as="shape" value="connector"/>
-		<add as="endArrow" value="classic"/>
+		<add as="endArrow" value="none"/>
 		<add as="edgeStyle" value="none"/>
 	</add>
 	<add as="arrow">

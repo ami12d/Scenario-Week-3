@@ -235,9 +235,9 @@ public class EditorMenuBar extends JMenuBar
 		menu.add(editor.bind(mxResources.get("actualSize"), mxGraphActions.getZoomActualAction()));
 
 		// Creates the format menu
-		menu = add(new JMenu(mxResources.get("format")));
-
-		populateFormatMenu(menu, editor);
+//		menu = add(new JMenu(mxResources.get("format")));
+//
+//		populateFormatMenu(menu, editor);
 
 		menu = add(new JMenu("Analyze"));
 		menu.add(editor.bind("Is Cyclic", new AnalyzeGraph(AnalyzeType.IS_CYCLIC_UNDIRECTED, aGraph)));
@@ -392,6 +392,8 @@ public class EditorMenuBar extends JMenuBar
 
 		submenu.add(editor.bind(mxResources.get("straight"), new SetStyleAction("straight"),
 				"/com/mxgraph/examples/swing/images/straight.gif"));
+		
+//		editor.bind(mxResources.get("none"), new KeyValueAction(mxConstants.STYLE_ENDARROW, mxConstants.NONE))
 
 		submenu.add(editor.bind(mxResources.get("horizontal"), new SetStyleAction(""), "/com/mxgraph/examples/swing/images/connect.gif"));
 		submenu.add(editor.bind(mxResources.get("vertical"), new SetStyleAction("vertical"),
