@@ -36,6 +36,18 @@ public class mxGraphStructure
 	 * @param aGraph
 	 * @return true if the graph is connected
 	 */
+	public static boolean isValid(mxAnalysisGraph aGraph)
+	{
+		int lowest = getLowestDegreeVertex(aGraph, null);
+		System.out.println(lowest);
+		if ((isConnected(aGraph) == true) && (isCyclicUndirected(aGraph) == true))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public static boolean isConnected(mxAnalysisGraph aGraph)
 	{
 		Object[] vertices = aGraph.getChildVertices(aGraph.getGraph().getDefaultParent());
@@ -175,69 +187,15 @@ public class mxGraphStructure
 		return null;
 	};
 
-	/**
-	 * @param aGraph
-	 * @return true if the graph is simple (no self loops and no multiple edges)
-	 */
-	public static boolean isSimple(mxAnalysisGraph aGraph)
-	{
-		Object parent = aGraph.getGraph().getDefaultParent();
-		Object[] edges = aGraph.getChildEdges(parent);
 
-		// self loop detection
-		for (int i = 0; i < edges.length; i++)
-		{
-			Object currEdge = edges[i];
 
-			if (aGraph.getTerminal(currEdge, true) == aGraph.getTerminal(currEdge, false))
-			{
-				return false;
-			}
-
-			for (int j = 0; j < edges.length; j++)
-			{
-				Object currEdge2 = edges[j];
-
-				if (currEdge != currEdge2)
-				{
-					if (aGraph.getTerminal(currEdge, true) == aGraph.getTerminal(currEdge2, true)
-							&& aGraph.getTerminal(currEdge, false) == aGraph.getTerminal(currEdge2, false))
-					{
-						return false;
-					}
-
-					if (aGraph.getTerminal(currEdge, true) == aGraph.getTerminal(currEdge2, false)
-							&& aGraph.getTerminal(currEdge, false) == aGraph.getTerminal(currEdge2, true))
-					{
-						return false;
-					}
-				}
-			}
-		}
-
-		return true;
-	};
-
-	/**
-	 * @param aGraph
-	 * @return true if the graph has the structure of a tree, regardless of edge direction
-	 */
-	public static boolean isTree(mxAnalysisGraph aGraph)
-	{
-		if (isConnected(aGraph) && !isCyclicUndirected(aGraph) && isSimple(aGraph))
-		{
-			return true;
-		}
-
-		return false;
-	};
 
 	/**
 	 * @param aGraph
 	 * @param omitVertex vertices in this array will be omitted, set this parameter to null if you don't want this feature
 	 * @return a vertex that has lowest degree, or one of those in case if there are more
 	 */
-	static public Object getLowestDegreeVertex(mxAnalysisGraph aGraph, Object[] omitVertex)
+	static public int getLowestDegreeVertex(mxAnalysisGraph aGraph, Object[] omitVertex)
 	{
 		Object[] vertices = aGraph.getChildVertices(aGraph.getGraph().getDefaultParent());
 		int vertexCount = vertices.length;
@@ -259,7 +217,7 @@ public class mxGraphStructure
 
 				if (currEdgeCount == 0)
 				{
-					return vertices[i];
+					//return vertices[i];
 				}
 				else
 				{
@@ -272,7 +230,7 @@ public class mxGraphStructure
 			}
 		}
 
-		return bestVertex;
+		return lowestEdgeCount;
 	};
 
 	/**
@@ -292,85 +250,85 @@ public class mxGraphStructure
 	 * @param graph
 	 * Make a graph simple (remove parallel edges and self loops)
 	 */
-	public static void makeSimple(mxAnalysisGraph aGraph)
-	{
-		// remove all self-loops
-		// reduce all valences >1 to 1
-		mxGraph graph = aGraph.getGraph();
-		Object parent = graph.getDefaultParent();
-
-		Object[] edges = aGraph.getChildEdges(parent);
-		//removing self-loops
-		for (int i = 0; i < edges.length; i++)
-		{
-			Object currEdge = edges[i];
-
-			if (aGraph.getTerminal(currEdge, true) == aGraph.getTerminal(currEdge, false))
-			{
-				graph.removeCells(new Object[] { currEdge });
-			}
-		}
-
-		edges = graph.getChildEdges(parent);
-		Set<Set<Object>> vertexSet = new HashSet<Set<Object>>();
-		ArrayList<Object> duplicateEdges = new ArrayList<Object>();
-
-		for (int i = 0; i < edges.length; i++)
-		{
-			Object currEdge = edges[i];
-			Object source = aGraph.getTerminal(currEdge, true);
-			Object target = aGraph.getTerminal(currEdge, false);
-			Set<Object> currSet = new HashSet<Object>();
-			currSet.add(source);
-			currSet.add(target);
-
-			if (vertexSet.contains(currSet))
-			{
-				//we have a duplicate edge
-				duplicateEdges.add(currEdge);
-			}
-			else
-			{
-				vertexSet.add(currSet);
-			}
-		}
-
-		Object[] duplEdges = duplicateEdges.toArray();
-
-		graph.removeCells(duplEdges);
-	};
+//	public static void makeSimple(mxAnalysisGraph aGraph)
+//	{
+//		// remove all self-loops
+//		// reduce all valences >1 to 1
+//		mxGraph graph = aGraph.getGraph();
+//		Object parent = graph.getDefaultParent();
+//
+//		Object[] edges = aGraph.getChildEdges(parent);
+//		//removing self-loops
+//		for (int i = 0; i < edges.length; i++)
+//		{
+//			Object currEdge = edges[i];
+//
+//			if (aGraph.getTerminal(currEdge, true) == aGraph.getTerminal(currEdge, false))
+//			{
+//				graph.removeCells(new Object[] { currEdge });
+//			}
+//		}
+//
+//		edges = graph.getChildEdges(parent);
+//		Set<Set<Object>> vertexSet = new HashSet<Set<Object>>();
+//		ArrayList<Object> duplicateEdges = new ArrayList<Object>();
+//
+//		for (int i = 0; i < edges.length; i++)
+//		{
+//			Object currEdge = edges[i];
+//			Object source = aGraph.getTerminal(currEdge, true);
+//			Object target = aGraph.getTerminal(currEdge, false);
+//			Set<Object> currSet = new HashSet<Object>();
+//			currSet.add(source);
+//			currSet.add(target);
+//
+//			if (vertexSet.contains(currSet))
+//			{
+//				//we have a duplicate edge
+//				duplicateEdges.add(currEdge);
+//			}
+//			else
+//			{
+//				vertexSet.add(currSet);
+//			}
+//		}
+//
+//		Object[] duplEdges = duplicateEdges.toArray();
+//
+//		graph.removeCells(duplEdges);
+//	};
 
 	/**
 	 * Makes the graph connected
 	 * @param aGraph
 	 */
-	public static void makeConnected(mxAnalysisGraph aGraph)
-	{
-		// an early check, to avoid running getGraphComponents() needlessly, which is CPU intensive
-		if (mxGraphStructure.isConnected(aGraph))
-		{
-			return;
-		}
-
-		Object[][] components = getGraphComponents(aGraph);
-		int componentNum = components.length;
-
-		if (componentNum < 2)
-		{
-			return;
-		}
-
-		mxGraph graph = aGraph.getGraph();
-		Object parent = graph.getDefaultParent();
-
-		// find a random vertex in each group and connect them.
-		for (int i = 1; i < componentNum; i++)
-		{
-			Object sourceVertex = components[i - 1][(int) Math.round(Math.random() * (components[i - 1].length - 1))];
-			Object targetVertex = components[i][(int) Math.round(Math.random() * (components[i].length - 1))];
-			graph.insertEdge(parent, null, aGraph.getGenerator().getNewEdgeValue(aGraph), sourceVertex, targetVertex);
-		}
-	};
+//	public static void makeConnected(mxAnalysisGraph aGraph)
+//	{
+//		// an early check, to avoid running getGraphComponents() needlessly, which is CPU intensive
+//		if (mxGraphStructure.isConnected(aGraph))
+//		{
+//			return;
+//		}
+//
+//		Object[][] components = getGraphComponents(aGraph);
+//		int componentNum = components.length;
+//
+//		if (componentNum < 2)
+//		{
+//			return;
+//		}
+//
+//		mxGraph graph = aGraph.getGraph();
+//		Object parent = graph.getDefaultParent();
+//
+//		// find a random vertex in each group and connect them.
+//		for (int i = 1; i < componentNum; i++)
+//		{
+//			Object sourceVertex = components[i - 1][(int) Math.round(Math.random() * (components[i - 1].length - 1))];
+//			Object targetVertex = components[i][(int) Math.round(Math.random() * (components[i].length - 1))];
+//			graph.insertEdge(parent, null, aGraph.getGenerator().getNewEdgeValue(aGraph), sourceVertex, targetVertex);
+//		}
+//	};
 
 	/**
 	 * @param aGraph
@@ -443,136 +401,7 @@ public class mxGraphStructure
 		return (Object[][]) result;
 	};
 
-	/**
-	 * Makes a tree graph directed from the source to the leaves
-	 * @param aGraph
-	 * @param startVertex - this vertex will be root of the tree (the only source node)
-	 * @throws StructuralException - the graph must be a tree (edge direction doesn't matter)
-	 */
-	public static void makeTreeDirected(mxAnalysisGraph aGraph, Object startVertex) throws StructuralException
-	{
-		if (isTree(aGraph))
-		{
-			mxGraphProperties.setDirected(aGraph.getProperties(), false);
-			final ArrayList<Object> bFSList = new ArrayList<Object>();
-			mxGraph graph = aGraph.getGraph();
-			final mxIGraphModel model = graph.getModel();
-			Object parent = graph.getDefaultParent();
 
-			mxTraversal.bfs(aGraph, startVertex, new mxICellVisitor()
-			{
-				public boolean visit(Object vertex, Object edge)
-				{
-					bFSList.add(vertex);
-					return false;
-				}
-			});
-
-			for (int i = 0; i < bFSList.size(); i++)
-			{
-				Object parentVertex = bFSList.get(i);
-				Object currEdges[] = aGraph.getEdges(parentVertex, parent, true, true, false, true);
-				Object[] neighbors = aGraph.getOpposites(currEdges, parentVertex, true, true);
-
-				for (int j = 0; j < neighbors.length; j++)
-				{
-					Object currVertex = neighbors[j];
-					int childIndex = bFSList.indexOf(currVertex);
-
-					if (childIndex > i)
-					{
-						//parentVertex is parent of currVertex, so the edge must be directed from parentVertex to currVertex
-						// but we need to find the connecting edge first
-						Object currEdge = getConnectingEdge(aGraph, parentVertex, currVertex);
-						model.setTerminal(currEdge, parentVertex, true);
-						model.setTerminal(currEdge, currVertex, false);
-					}
-				}
-			}
-
-			mxGraphProperties.setDirected(aGraph.getProperties(), true);
-			mxGraphStructure.setDefaultGraphStyle(aGraph, false);
-		}
-		else
-		{
-			throw new StructuralException("The graph is not a tree");
-		}
-	};
-
-	/**
-	 * @param aGraph
-	 * @param vertexOne
-	 * @param vertexTwo
-	 * @return an edge that directly connects <b>vertexOne</b> and <b>vertexTwo</b> regardless of direction, null if they are not connected directly
-	 */
-	public static Object getConnectingEdge(mxAnalysisGraph aGraph, Object vertexOne, Object vertexTwo)
-	{
-		mxIGraphModel model = aGraph.getGraph().getModel();
-		Object[] edges = aGraph.getEdges(vertexOne, null, true, true, false, true);
-
-		for (int i = 0; i < edges.length; i++)
-		{
-			Object currEdge = edges[i];
-			Object source = model.getTerminal(currEdge, true);
-			Object target = model.getTerminal(currEdge, false);
-
-			if (source.equals(vertexOne) && target.equals(vertexTwo))
-			{
-				return currEdge;
-
-			}
-
-			if (source.equals(vertexTwo) && target.equals(vertexOne))
-			{
-				return currEdge;
-			}
-		}
-
-		return null;
-	};
-
-	/**
-	 * @param graph
-	 * @return Returns true if the graph has at least one cycle, taking edge direction into account
-	 */
-	public static boolean isCyclicDirected(mxAnalysisGraph aGraph)
-	{
-		mxGraph graph = aGraph.getGraph();
-		mxIGraphModel model = graph.getModel();
-		Object[] cells = model.cloneCells(aGraph.getChildCells(graph.getDefaultParent(), true, true), true);
-		mxGraphModel modelCopy = new mxGraphModel();
-		mxGraph graphCopy = new mxGraph(modelCopy);
-		Object parentCopy = graphCopy.getDefaultParent();
-		graphCopy.addCells(cells);
-		mxAnalysisGraph aGraphCopy = new mxAnalysisGraph();
-		aGraphCopy.setGraph(graphCopy);
-		aGraphCopy.setGenerator(aGraph.getGenerator());
-		aGraphCopy.setProperties(aGraph.getProperties());
-
-		Object[] leaf = new Object[1];
-
-		do
-		{
-			leaf[0] = getDirectedLeaf(aGraphCopy, parentCopy);
-
-			if (leaf[0] != null)
-			{
-				graphCopy.removeCells(leaf);
-			}
-		}
-		while (leaf[0] != null);
-
-		int vertexNum = aGraphCopy.getChildVertices(parentCopy).length;
-
-		if (vertexNum > 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	};
 
 	/**
 	 * @param graph
@@ -886,78 +715,12 @@ public class mxGraphStructure
 	 * @param edge
 	 * @return true if <b>edge</b> is a cut edge of <b>aGraph</b> 
 	 */
-	public static boolean isCutEdge(mxAnalysisGraph aGraph, Object edge)
-	{
-		mxGraph graph = aGraph.getGraph();
-		mxIGraphModel model = graph.getModel();
-		mxCostFunction costFunction = aGraph.getGenerator().getCostFunction();
-		mxGraphView view = graph.getView();
-
-		int srcValue = (int) costFunction.getCost(new mxCellState(view, aGraph.getTerminal(edge, true), null));
-		int destValue = (int) costFunction.getCost(new mxCellState(view, aGraph.getTerminal(edge, false), null));
-
-		if (aGraph.getTerminal(edge, false) != null || aGraph.getTerminal(edge, true) != null)
-		{
-			Object[] cells = model.cloneCells(aGraph.getChildCells(graph.getDefaultParent(), true, true), true);
-			mxGraphModel modelCopy = new mxGraphModel();
-			mxGraph graphCopy = new mxGraph(modelCopy);
-			graphCopy.addCells(cells);
-			mxAnalysisGraph aGraphCopy = new mxAnalysisGraph();
-			aGraphCopy.setGraph(graphCopy);
-			aGraphCopy.setGenerator(aGraph.getGenerator());
-			aGraphCopy.setProperties(aGraph.getProperties());
-
-			Object[] edges = aGraphCopy.getChildEdges(aGraphCopy.getGraph().getDefaultParent());
-			Object currEdge = edges[0];
-			mxCostFunction costFunctionCopy = aGraphCopy.getGenerator().getCostFunction();
-			mxGraphView viewCopy = graphCopy.getView();
-
-			int currSrcValue = (int) costFunctionCopy.getCost(new mxCellState(viewCopy, aGraphCopy.getTerminal(currEdge, true), null));
-			int currDestValue = (int) costFunctionCopy.getCost(new mxCellState(viewCopy, aGraphCopy.getTerminal(currEdge, false), null));
-			int i = 0;
-
-			while (currSrcValue != srcValue || currDestValue != destValue)
-			{
-				i++;
-				currEdge = edges[i];
-				currSrcValue = Integer.parseInt((String) modelCopy.getValue(aGraphCopy.getTerminal(currEdge, true)));
-				currDestValue = Integer.parseInt((String) modelCopy.getValue(aGraphCopy.getTerminal(currEdge, false)));
-			}
-
-			graphCopy.removeCells(new Object[] { currEdge }, true);
-			Object[][] oldComponents = getGraphComponents(aGraph);
-			Object[][] newComponents = getGraphComponents(aGraphCopy);
-
-			if (newComponents.length > oldComponents.length)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	};
+	
 
 	/**
 	 * @param aGraph
 	 * @return all cut edges of <b>aGraph</b>
-	 */
-	public static Object[] getCutEdges(mxAnalysisGraph aGraph)
-	{
-		ArrayList<Object> cutEdgeList = new ArrayList<Object>();
-		Object[] edges = aGraph.getChildEdges(aGraph.getGraph().getDefaultParent());
-		int edgeNum = edges.length;
-
-		for (int i = 0; i < edgeNum; i++)
-		{
-			if (isCutEdge(aGraph, edges[i]))
-			{
-				cutEdgeList.add(edges[i]);
-			}
-		}
-
-		return cutEdgeList.toArray();
-	};
-
+	
 	/**
 	 * @param aGraph
 	 * @return all source vertices of <b>aGraph</b>
