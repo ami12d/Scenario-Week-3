@@ -3,11 +3,16 @@
  */
 package com.mxgraph.analysis;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import com.mxgraph.costfunction.mxCostFunction;
 import com.mxgraph.model.mxCell;
@@ -16,6 +21,9 @@ import com.mxgraph.model.mxIGraphModel;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraph.mxICellVisitor;
+
+import components.EditorActions.SaveAction;
+
 import com.mxgraph.view.mxGraphView;
 
 public class mxGraphStructure
@@ -38,13 +46,36 @@ public class mxGraphStructure
 	 */
 	public static boolean isValid(mxAnalysisGraph aGraph)
 	{
+		new SaveAction(false);
+		
 		int lowest = getLowestDegreeVertex(aGraph, null);
-		System.out.println(lowest);
-		if ((isConnected(aGraph) == true) && (isCyclicUndirected(aGraph) == true))
+		//System.out.println(lowest);
+		
+	    final JFrame parent = new JFrame();
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - parent.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - parent.getHeight()) / 2);
+	    parent.setLocation(x, y);
+		
+		JLabel label = new JLabel("My label");
+
+		
+		if ((isConnected(aGraph) == true) && (isCyclicUndirected(aGraph) == true) 
+				&& lowest!= 0 && lowest!= 1)
 		{
+			label.setText("Circuit is valid");
+		    parent.add(label);
+		    
+		    parent.pack();
+		    parent.setVisible(true);
 			return true;
 		}
 		
+		label.setText("Circuit is not valid");
+	    parent.add(label);
+	    
+	    parent.pack();
+	    parent.setVisible(true);
 		return false;
 	}
 	

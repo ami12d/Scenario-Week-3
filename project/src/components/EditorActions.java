@@ -561,6 +561,7 @@ public class EditorActions
 			// Saves as a PNG file
 			FileOutputStream outputStream = new FileOutputStream(new File(
 					filename));
+			System.out.println(filename);
 			try
 			{
 				mxPngImageEncoder encoder = new mxPngImageEncoder(outputStream,
@@ -767,9 +768,7 @@ public class EditorActions
 
 						if ((!ext.equalsIgnoreCase("gif") && !ext
 								.equalsIgnoreCase("png"))
-								|| JOptionPane.showConfirmDialog(
-										graphComponent, mxResources
-												.get("transparentBackground")) != JOptionPane.YES_OPTION)
+							)
 						{
 							bg = graphComponent.getBackground();
 						}
