@@ -70,21 +70,18 @@ import components.EditorActions.ToggleRulersItem;
 import components.EditorActions.WarningAction;
 import components.EditorActions.ZoomPolicyAction;
 
-public class EditorMenuBar extends JMenuBar
-{
+public class EditorMenuBar extends JMenuBar {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4060203894740766714L;
 
-	public enum AnalyzeType
-	{
+	public enum AnalyzeType {
 		IS_VALID, IS_CONNECTED, IS_CYCLIC_DIRECTED, IS_CYCLIC_UNDIRECTED, COMPLEMENTARY, REGULARITY, COMPONENTS, IS_DIRECTED;
 	}
 
-	public EditorMenuBar(final BasicGraphEditor editor)
-	{
+	public EditorMenuBar(final BasicGraphEditor editor) {
 		final mxGraphComponent graphComponent = editor.getGraphComponent();
 		final mxGraph graph = graphComponent.getGraph();
 		mxAnalysisGraph aGraph = new mxAnalysisGraph();
@@ -96,12 +93,15 @@ public class EditorMenuBar extends JMenuBar
 		menu = add(new JMenu(mxResources.get("file")));
 
 		menu.add(editor.bind(mxResources.get("new"), new NewAction(), "/com/mxgraph/examples/swing/images/new.gif"));
-		menu.add(editor.bind(mxResources.get("openFile"), new OpenAction(), "/com/mxgraph/examples/swing/images/open.gif"));
+		menu.add(editor.bind(mxResources.get("openFile"), new OpenAction(),
+				"/com/mxgraph/examples/swing/images/open.gif"));
 
 		menu.addSeparator();
 
-		menu.add(editor.bind(mxResources.get("save"), new SaveAction(false), "/com/mxgraph/examples/swing/images/save.gif"));
-		menu.add(editor.bind(mxResources.get("saveAs"), new SaveAction(true), "/com/mxgraph/examples/swing/images/saveas.gif"));
+		menu.add(editor.bind(mxResources.get("save"), new SaveAction(false),
+				"/com/mxgraph/examples/swing/images/save.gif"));
+		menu.add(editor.bind(mxResources.get("saveAs"), new SaveAction(true),
+				"/com/mxgraph/examples/swing/images/saveas.gif"));
 
 		menu.addSeparator();
 
@@ -110,18 +110,24 @@ public class EditorMenuBar extends JMenuBar
 		// Creates the edit menu
 		menu = add(new JMenu(mxResources.get("edit")));
 
-		menu.add(editor.bind(mxResources.get("undo"), new HistoryAction(true), "/com/mxgraph/examples/swing/images/undo.gif"));
-		menu.add(editor.bind(mxResources.get("redo"), new HistoryAction(false), "/com/mxgraph/examples/swing/images/redo.gif"));
+		menu.add(editor.bind(mxResources.get("undo"), new HistoryAction(true),
+				"/com/mxgraph/examples/swing/images/undo.gif"));
+		menu.add(editor.bind(mxResources.get("redo"), new HistoryAction(false),
+				"/com/mxgraph/examples/swing/images/redo.gif"));
 
 		menu.addSeparator();
 
-		menu.add(editor.bind(mxResources.get("cut"), TransferHandler.getCutAction(), "/com/mxgraph/examples/swing/images/cut.gif"));
-		menu.add(editor.bind(mxResources.get("copy"), TransferHandler.getCopyAction(), "/com/mxgraph/examples/swing/images/copy.gif"));
-		menu.add(editor.bind(mxResources.get("paste"), TransferHandler.getPasteAction(), "/com/mxgraph/examples/swing/images/paste.gif"));
+		menu.add(editor.bind(mxResources.get("cut"), TransferHandler.getCutAction(),
+				"/com/mxgraph/examples/swing/images/cut.gif"));
+		menu.add(editor.bind(mxResources.get("copy"), TransferHandler.getCopyAction(),
+				"/com/mxgraph/examples/swing/images/copy.gif"));
+		menu.add(editor.bind(mxResources.get("paste"), TransferHandler.getPasteAction(),
+				"/com/mxgraph/examples/swing/images/paste.gif"));
 
 		menu.addSeparator();
 
-		menu.add(editor.bind(mxResources.get("delete"), mxGraphActions.getDeleteAction(), "/com/mxgraph/examples/swing/images/delete.gif"));
+		menu.add(editor.bind(mxResources.get("delete"), mxGraphActions.getDeleteAction(),
+				"/com/mxgraph/examples/swing/images/delete.gif"));
 
 		menu.addSeparator();
 
@@ -135,61 +141,51 @@ public class EditorMenuBar extends JMenuBar
 		// Creates the view menu
 		menu = add(new JMenu(mxResources.get("view")));
 
-		JMenuItem item = menu.add(new TogglePropertyItem(graphComponent, mxResources.get("pageLayout"), "PageVisible", true,
-				new ActionListener()
-				{
+		JMenuItem item = menu.add(new TogglePropertyItem(graphComponent, mxResources.get("pageLayout"), "PageVisible",
+				true, new ActionListener() {
 					/**
 					 * 
 					 */
-					public void actionPerformed(ActionEvent e)
-					{
-						if (graphComponent.isPageVisible() && graphComponent.isCenterPage())
-						{
+					public void actionPerformed(ActionEvent e) {
+						if (graphComponent.isPageVisible() && graphComponent.isCenterPage()) {
 							graphComponent.zoomAndCenter();
-						}
-						else
-						{
+						} else {
 							graphComponent.getGraphControl().updatePreferredSize();
 						}
 					}
 				}));
 
-		item.addActionListener(new ActionListener()
-		{
+		item.addActionListener(new ActionListener() {
 			/*
 			 * (non-Javadoc)
-			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 * 
+			 * @see
+			 * java.awt.event.ActionListener#actionPerformed(java.awt.event.
+			 * ActionEvent)
 			 */
-			public void actionPerformed(ActionEvent e)
-			{
-				if (e.getSource() instanceof TogglePropertyItem)
-				{
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() instanceof TogglePropertyItem) {
 					final mxGraphComponent graphComponent = editor.getGraphComponent();
 					TogglePropertyItem toggleItem = (TogglePropertyItem) e.getSource();
 
-					if (toggleItem.isSelected())
-					{
+					if (toggleItem.isSelected()) {
 						// Scrolls the view to the center
-						SwingUtilities.invokeLater(new Runnable()
-						{
+						SwingUtilities.invokeLater(new Runnable() {
 							/*
 							 * (non-Javadoc)
+							 * 
 							 * @see java.lang.Runnable#run()
 							 */
-							public void run()
-							{
+							public void run() {
 								graphComponent.scrollToCenter(true);
 								graphComponent.scrollToCenter(false);
 							}
 						});
-					}
-					else
-					{
+					} else {
 						// Resets the translation of the view
 						mxPoint tr = graphComponent.getGraph().getView().getTranslate();
 
-						if (tr.getX() != 0 || tr.getY() != 0)
-						{
+						if (tr.getX() != 0 || tr.getY() != 0) {
 							graphComponent.getGraph().getView().setTranslate(new mxPoint());
 						}
 					}
@@ -221,13 +217,8 @@ public class EditorMenuBar extends JMenuBar
 
 		menu.add(editor.bind(mxResources.get("actualSize"), mxGraphActions.getZoomActualAction()));
 
-		// Creates the format menu
-//		menu = add(new JMenu(mxResources.get("format")));
-//		populateFormatMenu(menu, editor);
-
 		menu = add(new JMenu("Analyze"));
 		menu.add(editor.bind("Is Cyclic", new AnalyzeGraph(AnalyzeType.IS_CYCLIC_UNDIRECTED, aGraph)));
-		menu.add(editor.bind("Complementary", new AnalyzeGraph(AnalyzeType.COMPLEMENTARY, aGraph)));
 		menu.add(editor.bind("Regularity", new AnalyzeGraph(AnalyzeType.REGULARITY, aGraph)));
 		menu.add(editor.bind("Get Components", new AnalyzeGraph(AnalyzeType.COMPONENTS, aGraph)));
 		menu.add(editor.bind("Check Validity", new AnalyzeGraph(AnalyzeType.IS_VALID, aGraph)));
@@ -236,27 +227,19 @@ public class EditorMenuBar extends JMenuBar
 	/**
 	 *
 	 */
-	public static class InsertGraph extends AbstractAction
-	{
+	public static class InsertGraph extends AbstractAction {
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 4010463992665008365L;
 
-		/**
-		 * 
-		 */
 		protected GraphType graphType;
 
 		protected mxAnalysisGraph aGraph;
 
 		/**
-		 * @param aGraph 
+		 * @param aGraph
 		 * 
 		 */
-		public InsertGraph(GraphType tree, mxAnalysisGraph aGraph)
-		{
+		public InsertGraph(GraphType tree, mxAnalysisGraph aGraph) {
 			this.graphType = tree;
 			this.aGraph = aGraph;
 		}
@@ -264,10 +247,8 @@ public class EditorMenuBar extends JMenuBar
 		/**
 		 * 
 		 */
-		public void actionPerformed(ActionEvent e)
-		{
-			if (e.getSource() instanceof mxGraphComponent)
-			{
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() instanceof mxGraphComponent) {
 				mxGraphComponent graphComponent = (mxGraphComponent) e.getSource();
 				mxGraph graph = graphComponent.getGraph();
 
@@ -279,52 +260,14 @@ public class EditorMenuBar extends JMenuBar
 					dialogText = "Configure complete graph";
 				else if (graphType == GraphType.NREGULAR)
 					dialogText = "Configure n-regular graph";
-				else if (graphType == GraphType.GRID)
-					dialogText = "Configure grid graph";
-				else if (graphType == GraphType.BIPARTITE)
-					dialogText = "Configure bipartite graph";
-				else if (graphType == GraphType.COMPLETE_BIPARTITE)
-					dialogText = "Configure complete bipartite graph";
-				else if (graphType == GraphType.BFS_DIR)
-					dialogText = "Configure BFS algorithm";
-				else if (graphType == GraphType.BFS_UNDIR)
-					dialogText = "Configure BFS algorithm";
-				else if (graphType == GraphType.DFS_DIR)
-					dialogText = "Configure DFS algorithm";
-				else if (graphType == GraphType.DFS_UNDIR)
-					dialogText = "Configure DFS algorithm";
-				else if (graphType == GraphType.DIJKSTRA)
-					dialogText = "Configure Dijkstra's algorithm";
-				else if (graphType == GraphType.BELLMAN_FORD)
-					dialogText = "Configure Bellman-Ford algorithm";
-				else if (graphType == GraphType.MAKE_TREE_DIRECTED)
-					dialogText = "Configure make tree directed algorithm";
-				else if (graphType == GraphType.KNIGHT_TOUR)
-					dialogText = "Configure knight's tour";
-				else if (graphType == GraphType.GET_ADJ_MATRIX)
-					dialogText = "Configure adjacency matrix";
-				else if (graphType == GraphType.FROM_ADJ_MATRIX)
-					dialogText = "Input adjacency matrix";
-				else if (graphType == GraphType.PETERSEN)
-					dialogText = "Configure Petersen graph";
-				else if (graphType == GraphType.WHEEL)
-					dialogText = "Configure Wheel graph";
-				else if (graphType == GraphType.STAR)
-					dialogText = "Configure Star graph";
-				else if (graphType == GraphType.PATH)
-					dialogText = "Configure Path graph";
-				else if (graphType == GraphType.FRIENDSHIP_WINDMILL)
-					dialogText = "Configure Friendship Windmill graph";
-				else if (graphType == GraphType.INDEGREE)
-					dialogText = "Configure indegree analysis";
-				else if (graphType == GraphType.OUTDEGREE)
-					dialogText = "Configure outdegree analysis";
+
 				GraphConfigDialog dialog = new GraphConfigDialog(graphType, dialogText);
 				dialog.configureLayout(graph, graphType, aGraph);
 				dialog.setModal(true);
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				Dimension frameSize = dialog.getSize();
-				dialog.setLocation(screenSize.width / 2 - (frameSize.width / 2), screenSize.height / 2 - (frameSize.height / 2));
+				dialog.setLocation(screenSize.width / 2 - (frameSize.width / 2),
+						screenSize.height / 2 - (frameSize.height / 2));
 				dialog.setVisible(true);
 			}
 		}
@@ -333,8 +276,7 @@ public class EditorMenuBar extends JMenuBar
 	/**
 	 *
 	 */
-	public static class AnalyzeGraph extends AbstractAction
-	{
+	public static class AnalyzeGraph extends AbstractAction {
 		/**
 		 * 
 		 */
@@ -348,120 +290,59 @@ public class EditorMenuBar extends JMenuBar
 		protected AnalyzeType analyzeType;
 
 		/**
-		 * Examples for calling analysis methods from mxGraphStructure 
+		 * Examples for calling analysis methods from mxGraphStructure
 		 */
-		public AnalyzeGraph(AnalyzeType analyzeType, mxAnalysisGraph aGraph)
-		{
+		public AnalyzeGraph(AnalyzeType analyzeType, mxAnalysisGraph aGraph) {
 			this.analyzeType = analyzeType;
 			this.aGraph = aGraph;
 		}
 
-		public void actionPerformed(ActionEvent e)
-		{
-			if (e.getSource() instanceof mxGraphComponent)
-			{
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() instanceof mxGraphComponent) {
 				mxGraphComponent graphComponent = (mxGraphComponent) e.getSource();
 				mxGraph graph = graphComponent.getGraph();
 				aGraph.setGraph(graph);
 
-				if (analyzeType == AnalyzeType.IS_VALID){
+				if (analyzeType == AnalyzeType.IS_VALID) {
 					boolean isValid = mxGraphStructure.isValid(aGraph);
-					if (isValid)
-					{
+					if (isValid) {
 						System.out.println("Circuit is valid");
-					}
-					else
-					{
+					} else {
 						System.out.println("Circuit is not valid");
 					}
-				}
-				else if (analyzeType == AnalyzeType.IS_CONNECTED)
-				{
+				} else if (analyzeType == AnalyzeType.IS_CONNECTED) {
 					boolean isConnected = mxGraphStructure.isConnected(aGraph);
 
-					if (isConnected)
-					{
+					if (isConnected) {
 						System.out.println("The graph is connected");
-					}
-					else
-					{
+					} else {
 						System.out.println("The graph is not connected");
 					}
 				}
-//				else if (analyzeType == AnalyzeType.IS_CYCLIC_DIRECTED)
-//				{
-//					boolean isCyclicDirected = mxGraphStructure.isCyclicDirected(aGraph);
-//
-//					if (isCyclicDirected)
-//					{
-//						System.out.println("The graph is cyclic directed");
-//					}
-//					else
-//					{
-//						System.out.println("The graph is acyclic directed");
-//					}
-//				}
-				else if (analyzeType == AnalyzeType.IS_CYCLIC_UNDIRECTED)
-				{
+
+				else if (analyzeType == AnalyzeType.IS_CYCLIC_UNDIRECTED) {
 					boolean isCyclicUndirected = mxGraphStructure.isCyclicUndirected(aGraph);
 
-					if (isCyclicUndirected)
-					{
+					if (isCyclicUndirected) {
 						System.out.println("The graph is cyclic undirected");
-					}
-					else
-					{
+					} else {
 						System.out.println("The graph is acyclic undirected");
 					}
-					
-//			        final JFrame parent = new JFrame();
-//			        JButton button = new JButton();
-//
-//			        button.setText("Click me to show dialog!");
-//			        parent.add(button);
-//			        parent.pack();
-//			        parent.setVisible(true);
-//
-//			        button.addActionListener(new java.awt.event.ActionListener() {
-//			            @Override
-//			            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//			                String name = JOptionPane.showInputDialog(parent,
-//			                        "What is your name?", null);
-//			            }
-//			        });
-				}
-				else if (analyzeType == AnalyzeType.COMPLEMENTARY)
-				{
-					graph.getModel().beginUpdate();
-
-					mxGraphStructure.complementaryGraph(aGraph);
-
-					mxGraphStructure.setDefaultGraphStyle(aGraph, true);
-					graph.getModel().endUpdate();
-				}
-				else if (analyzeType == AnalyzeType.REGULARITY)
-				{
-					try
-					{
+				} else if (analyzeType == AnalyzeType.REGULARITY) {
+					try {
 						int regularity = mxGraphStructure.regularity(aGraph);
 						System.out.println("Graph regularity is: " + regularity);
-					}
-					catch (StructuralException e1)
-					{
+					} catch (StructuralException e1) {
 						System.out.println("The graph is irregular");
 					}
-				}
-				else if (analyzeType == AnalyzeType.COMPONENTS)
-				{
+				} else if (analyzeType == AnalyzeType.COMPONENTS) {
 					Object[][] components = mxGraphStructure.getGraphComponents(aGraph);
 					mxIGraphModel model = aGraph.getGraph().getModel();
 
-					for (int i = 0; i < components.length; i++)
-					{
+					for (int i = 0; i < components.length; i++) {
 						System.out.print("Component " + i + " :");
 
-						for (int j = 0; j < components[i].length; j++)
-						{
+						for (int j = 0; j < components[i].length; j++) {
 							System.out.print(" " + model.getValue(components[i][j]));
 						}
 
@@ -470,17 +351,13 @@ public class EditorMenuBar extends JMenuBar
 
 					System.out.println("Number of components: " + components.length);
 
-				}
-				else if (analyzeType == AnalyzeType.IS_DIRECTED)
-				{
-					boolean isDirected = mxGraphProperties.isDirected(aGraph.getProperties(), mxGraphProperties.DEFAULT_DIRECTED);
+				} else if (analyzeType == AnalyzeType.IS_DIRECTED) {
+					boolean isDirected = mxGraphProperties.isDirected(aGraph.getProperties(),
+							mxGraphProperties.DEFAULT_DIRECTED);
 
-					if (isDirected)
-					{
+					if (isDirected) {
 						System.out.println("The graph is directed.");
-					}
-					else
-					{
+					} else {
 						System.out.println("The graph is undirected.");
 					}
 				}
