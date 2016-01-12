@@ -165,12 +165,12 @@ public class GraphEditor extends BasicGraphEditor
 						80, 80, "Closed Switch");
 		symbolsPalette
 				.addTemplate(
-						"Variable resistor",
+						"Resistor",
 						new ImageIcon(
 								GraphEditor.class
 										.getResource("/com/mxgraph/examples/swing/images/variable_resistor.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png",
-						80, 80, "Variable resistor");
+						80, 80, "Resistor");
 		symbolsPalette
 				.addTemplate(
 						"LED",
@@ -187,14 +187,6 @@ public class GraphEditor extends BasicGraphEditor
 										.getResource("/com/mxgraph/examples/swing/images/fuse.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/fuse.png",
 						80, 80, "Fuse");
-		symbolsPalette
-				.addTemplate(
-						"Thermistor",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/thermistor.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/thermistor.png",
-						80, 80, "Thermistor");
 		symbolsPalette
 				.addTemplate(
 						"Buzzer",

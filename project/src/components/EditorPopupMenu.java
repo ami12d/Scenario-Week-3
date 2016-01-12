@@ -51,18 +51,6 @@ public class EditorPopupMenu extends JPopupMenu
 
 		addSeparator();
 
-		// Creates the format menu
-		JMenu menu = (JMenu) add(new JMenu(mxResources.get("format")));
-
-		EditorMenuBar.populateFormatMenu(menu, editor);
-
-		// Creates the shape menu
-		menu = (JMenu) add(new JMenu(mxResources.get("shape")));
-
-		EditorMenuBar.populateShapeMenu(menu, editor);
-
-		addSeparator();
-
 		add(
 				editor.bind(mxResources.get("edit"), mxGraphActions
 						.getEditAction())).setEnabled(selected);
