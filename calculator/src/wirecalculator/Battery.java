@@ -24,11 +24,11 @@ public class Battery extends Component {
     @Override
     public double getCurrent() {
         double totalResistance = 0.0;
-        Component current = this;
+        Component component = this;
         do {
-            totalResistance += current.getResistance();
-            current = current.getNextComponent();
-        } while(current != this);
+            totalResistance += component.getResistance();
+            component = component.getNextComponent();
+        } while(component != this);
         return voltage / totalResistance;
     }
 }

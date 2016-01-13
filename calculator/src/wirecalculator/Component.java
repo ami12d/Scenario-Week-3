@@ -15,7 +15,7 @@ public abstract class Component {
     public double getVoltage() {
         double totalResistance = getResistance();
         Component prev = getPreviousComponent();
-        while(prev.getClass() != Battery.class && prev.getClass() != SeriesNodeStart.class ) {
+        while(prev.getClass() != Battery.class && prev.getClass() != ParallelNodeStart.class ) {
             totalResistance += prev.getResistance();
             prev = prev.getPreviousComponent();
         }
@@ -26,7 +26,7 @@ public abstract class Component {
                 totalResistance += next.getResistance();
                 next = next.getNextComponent();
             }
-        } else if(prev.getClass() == SeriesNodeStart.class) {
+        } else if(prev.getClass() == ParallelNodeStart.class) {
             while(next != prev.getNextComponent().getPreviousComponent()) { //gets prev's pair
                 totalResistance += next.getResistance();
                 next = next.getNextComponent();
@@ -36,9 +36,10 @@ public abstract class Component {
     }
 
     public double getTotalResistance() {
+        //gets the total resistance of the series circuit the component is connected to.
         double totalResistance = resistance;
         Component prev = getPreviousComponent();
-        while(prev.getClass() != Battery.class && prev.getClass() != SeriesNodeStart.class ) {
+        while(prev.getClass() != Battery.class && prev.getClass() != ParallelNodeStart.class ) {
             totalResistance += prev.getResistance();
             prev = prev.getPreviousComponent();
         }
@@ -49,7 +50,7 @@ public abstract class Component {
                 totalResistance += next.getResistance();
                 next = next.getNextComponent();
             }
-        } else if(prev.getClass() == SeriesNodeStart.class) {
+        } else if(prev.getClass() == ParallelNodeStart.class) {
             while(next != prev.getNextComponent().getPreviousComponent()) { //gets prev's pair
                 totalResistance += next.getResistance();
                 next = next.getNextComponent();

@@ -33,8 +33,8 @@ public class Main {
 
         //Parallel test
         battery = new Battery(10);
-        SeriesNodeStart sns = new SeriesNodeStart();
-        SeriesNodeEnd sne = new SeriesNodeEnd();
+        ParallelNodeStart sns = new ParallelNodeStart();
+        ParallelNodeEnd sne = new ParallelNodeEnd();
         resistor1 = new Resistor(4);
         resistor2 = new Resistor(4);
         wire1 = new Wire(battery, sns);
@@ -49,12 +49,12 @@ public class Main {
 
         //Series-Parallel circuit test (http://www.allaboutcircuits.com/textbook/direct-current/chpt-7/analysis-technique/)
         battery = new Battery(24);
-        SeriesNodeStart sns1 = new SeriesNodeStart();
-        SeriesNodeEnd sne1 = new SeriesNodeEnd();
+        ParallelNodeStart sns1 = new ParallelNodeStart();
+        ParallelNodeEnd sne1 = new ParallelNodeEnd();
         resistor1 = new Resistor(100);
         resistor2 = new Resistor(250);
-        SeriesNodeStart sns2 = new SeriesNodeStart();
-        SeriesNodeEnd sne2 = new SeriesNodeEnd();
+        ParallelNodeStart sns2 = new ParallelNodeStart();
+        ParallelNodeEnd sne2 = new ParallelNodeEnd();
         Resistor resistor3 = new Resistor(350);
         Resistor resistor4 = new Resistor(200);
         wire1 = new Wire(battery, sns1);
@@ -71,14 +71,13 @@ public class Main {
         printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
         printEverythingAboutIt(resistor2);
-        printEverythingAboutIt(sns2);
         printEverythingAboutIt(resistor3);
         printEverythingAboutIt(resistor4);
 
         //Parallel-Series circuit test
         battery = new Battery(10);
-        sns = new SeriesNodeStart();
-        sne = new SeriesNodeEnd();
+        sns = new ParallelNodeStart();
+        sne = new ParallelNodeEnd();
         resistor1 = new Resistor(1);
         resistor2 = new Resistor(2);
         resistor3 = new Resistor(3);

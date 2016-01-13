@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * Created by bagus maulana on 13/01/2016.
  */
-public class SeriesNodeEnd extends Component {
+public class ParallelNodeEnd extends Component {
 
     private List<Wire> prevs;
 
-    public SeriesNodeEnd() {
+    public ParallelNodeEnd() {
         super(0.0);
         prevs = new ArrayList<>();
     }
@@ -19,7 +19,7 @@ public class SeriesNodeEnd extends Component {
     public Component getPreviousComponent() {
         //get the component before the start of the series circuit
         Component component = prevs.get(0).getPrev();
-        while(component.getClass() != SeriesNodeStart.class) {
+        while(component.getClass() != ParallelNodeStart.class) {
             component = component.getPreviousComponent();
         }
         return component.getPreviousComponent();
