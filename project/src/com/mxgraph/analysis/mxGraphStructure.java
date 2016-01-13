@@ -15,7 +15,6 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.text.Document;
 
 import com.mxgraph.costfunction.mxCostFunction;
 import com.mxgraph.io.mxCodec;
@@ -58,9 +57,8 @@ public class mxGraphStructure {
 		mxGraph graph = aGraph.getGraph();
 		mxCodec codec = new mxCodec();
 		String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
-		
+
 		System.out.println(xml);
-	
 
 		final JFrame parent = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
