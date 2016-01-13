@@ -26,10 +26,9 @@ public class Test {
     public static void main(String[] args) {
         //TODO change to testing classes (assertThat etc.)
 
-        //Limitations:
+        //Current limitations:
         //Can only have one battery
-        //Cannot remove components once added
-
+        //Cannot remove components once added (has to re-parse everything every time user checks voltage/current)
 
         //Series test
         Battery battery = new Battery(10, getID());
@@ -38,9 +37,9 @@ public class Test {
         Wire wire1 = new Wire(battery, resistor1);
         Wire wire2 = new Wire(resistor1, resistor2);
         Wire wire3 = new Wire(resistor2, battery);
-        /*printEverythingAboutIt(battery);
+        printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
-        printEverythingAboutIt(resistor2);*/
+        printEverythingAboutIt(resistor2);
 
         //Parallel test
         battery = new Battery(10, getID());
@@ -54,9 +53,9 @@ public class Test {
         Wire wire4 = new Wire(resistor1, sne);
         Wire wire5 = new Wire(resistor2, sne);
         Wire wire6 = new Wire(sne, battery);
-        /*printEverythingAboutIt(battery);
+        printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
-        printEverythingAboutIt(resistor2);*/
+        printEverythingAboutIt(resistor2);
 
         //Series-Parallel circuit test (http://www.allaboutcircuits.com/textbook/direct-current/chpt-7/analysis-technique/)
         battery = new Battery(24, getID());
@@ -101,10 +100,10 @@ public class Test {
         wire6 = new Wire(resistor3, sne);
         wire7 = new Wire(resistor4, sne);
         wire8 = new Wire(sne, battery);
-        /*printEverythingAboutIt(battery);
+        printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
         printEverythingAboutIt(resistor2);
         printEverythingAboutIt(resistor3);
-        printEverythingAboutIt(resistor4);*/
+        printEverythingAboutIt(resistor4);
     }
 }

@@ -14,19 +14,10 @@ public class Wire {
         this.next = next;
     }
 
-    public Component getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Component prev) {
-        this.prev = prev;
-    }
-
-    public Component getNext() {
-        return next;
-    }
-
-    public void setNext(Component next) {
-        this.next = next;
+    public Component getConnectedComponent(Component component) {
+        //returns the component connected by the wire to the component in the parameter
+        if(component == prev) return next;
+        if(component == next) return prev;
+        else return null;
     }
 }

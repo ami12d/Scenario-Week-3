@@ -62,11 +62,11 @@ public abstract class Component {
     }
 
     public Component getPreviousComponent() {
-        return prev.getPrev();
+        return prev.getConnectedComponent(this);
     }
 
     public Component getNextComponent() {
-        return next.getNext();
+        return next.getConnectedComponent(this);
     }
 
     public double getResistance() {

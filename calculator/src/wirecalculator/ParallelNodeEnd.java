@@ -18,7 +18,7 @@ public class ParallelNodeEnd extends Component {
     @Override
     public Component getPreviousComponent() {
         //get the component before the start of the parallel circuit
-        Component component = prevs.get(0).getPrev();
+        Component component = prevs.get(0).getConnectedComponent(this);
         while(component.getClass() != ParallelNodeStart.class) {
             component = component.getPreviousComponent();
         }
@@ -29,7 +29,7 @@ public class ParallelNodeEnd extends Component {
     public double getResistance() {
         double sum = 0.0;
         for(Wire prev: prevs){
-            sum += (1 / prev.getPrev().getTotalResistance());
+            sum += (1 / prev.getConnectedComponent(this).getTotalResistance());
         }
         return (1 / sum);
     }
