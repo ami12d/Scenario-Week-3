@@ -50,14 +50,11 @@ public class mxGraphStructure {
 	 * @return true if the graph is connected
 	 */
 	public static boolean isValid(mxAnalysisGraph aGraph) {
-		new SaveAction(false);
-
 		int lowest = getLowestDegreeVertex(aGraph, null);
 
 		mxGraph graph = aGraph.getGraph();
 		mxCodec codec = new mxCodec();
 		String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
-
 		System.out.println(xml);
 
 		final JFrame parent = new JFrame();
@@ -68,7 +65,10 @@ public class mxGraphStructure {
 
 		JLabel label = new JLabel("My label");
 
-		if ((isConnected(aGraph) == true) && (isCyclicUndirected(aGraph) == true) && lowest != 0 && lowest != 1) {
+		if ((isConnected(aGraph) == true) 
+				&& (isCyclicUndirected(aGraph) == true) 
+				&& lowest != 0 && lowest != 1
+				&& hasBattery(aGraph)) {
 			label.setText("Circuit is valid");
 			parent.add(label);
 
@@ -84,6 +84,103 @@ public class mxGraphStructure {
 		parent.setVisible(true);
 		return false;
 	}
+	
+	
+	
+	public static boolean hasBattery(mxAnalysisGraph aGraph)
+	{
+		mxGraph graph = aGraph.getGraph();
+		Object parent = graph.getDefaultParent();
+		Object[] vertices = aGraph.getChildVertices(parent);
+		int vertexCount = vertices.length;
+
+		for (int i = 0; i < vertexCount; i++)
+		{
+			mxCell currVertex = (mxCell) vertices[i];
+			if(currVertex.getStyle().contains("battery.png")){
+				return true;
+			}
+		}
+		return false;
+	};
+
+	
+	// READ THIS! i read complementaryGraph to help make me make hasBattery()
+	
+	public static void complementaryGraph(mxAnalysisGraph aGraph)
+	{
+		ArrayList<ArrayList<mxCell>> oldConnections = new ArrayList<ArrayList<mxCell>>();
+		mxGraph graph = aGraph.getGraph();
+		Object parent = graph.getDefaultParent();
+		//replicate the edge connections in oldConnections
+		Object[] vertices = aGraph.getChildVertices(parent);
+		int vertexCount = vertices.length;
+
+		for (int i = 0; i < vertexCount; i++)
+		{
+			mxCell currVertex = (mxCell) vertices[i];
+			int edgeCount = currVertex.getEdgeCount();
+			mxCell currEdge = new mxCell();
+			ArrayList<mxCell> neighborVertexes = new ArrayList<mxCell>();
+
+			for (int j = 0; j < edgeCount; j++)
+			{
+				currEdge = (mxCell) currVertex.getEdgeAt(j);
+
+				mxCell source = (mxCell) currEdge.getSource();
+				mxCell destination = (mxCell) currEdge.getTarget();
+
+				if (!source.equals(currVertex))
+				{
+					neighborVertexes.add(j, source);
+				}
+				else
+				{
+					neighborVertexes.add(j, destination);
+				}
+
+			}
+
+			oldConnections.add(i, neighborVertexes);
+		}
+
+		//delete all edges and make a complementary model
+		Object[] edges = aGraph.getChildEdges(parent);
+		graph.removeCells(edges);
+
+		for (int i = 0; i < vertexCount; i++)
+		{
+			ArrayList<mxCell> oldNeighbors = new ArrayList<mxCell>();
+			oldNeighbors = oldConnections.get(i);
+			mxCell currVertex = (mxCell) vertices[i];
+
+			for (int j = 0; j < vertexCount; j++)
+			{
+				mxCell targetVertex = (mxCell) vertices[j];
+				boolean shouldConnect = true; // the decision if the two current vertexes should be connected
+
+				if (oldNeighbors.contains(targetVertex))
+				{
+					shouldConnect = false;
+				}
+				else if (targetVertex.equals(currVertex))
+				{
+					shouldConnect = false;
+				}
+				else if (areConnected(aGraph, currVertex, targetVertex))
+				{
+					shouldConnect = false;
+				}
+
+				if (shouldConnect)
+				{
+					graph.insertEdge(parent, null, null, currVertex, targetVertex);
+				}
+			}
+
+		}
+	};
+	
 
 	public static boolean isConnected(mxAnalysisGraph aGraph) {
 		Object[] vertices = aGraph.getChildVertices(aGraph.getGraph().getDefaultParent());
