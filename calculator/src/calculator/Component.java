@@ -5,8 +5,6 @@ package calculator;
  */
 public abstract class Component {
     private double resistance;
-    //private Wire prev;
-    //private Wire next;
     protected Circuit parent;
 
     public Component(double resistance, Circuit parent) {
@@ -34,20 +32,4 @@ public abstract class Component {
     public double getCurrent() {
         return getVoltage() / getResistance();
     }
-
-    /*public Wire getPrev() {
-        return prev;
-    }
-
-    public void setPrev(Wire prev) {
-        this.prev = prev;
-    }
-
-    public Wire getNext() {
-        return next;
-    }
-
-    public void setNext(Wire next) {
-        this.next = next;
-    }*/
 }

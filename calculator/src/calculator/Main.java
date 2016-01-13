@@ -18,24 +18,24 @@ public class Main {
 
 	    // Series circuit test
         Circuit series = new SeriesCircuit();
-        Battery battery = series.addBattery(10.0);
+        Battery battery = series.addBattery(10);
         Resistor resistor1 = series.addResistor(2);
         Resistor resistor2 = series.addResistor(3);
 
-        printEverythingAboutIt(series);
+        //printEverythingAboutIt(series);
         printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
         printEverythingAboutIt(resistor2);
 
         //Parallel circuit test
         Circuit parallelWrapper = new SeriesCircuit(); //top level circuit has to be a series circuit
-        battery = parallelWrapper.addBattery(10, 0);
+        battery = parallelWrapper.addBattery(10);
         Circuit parallel = parallelWrapper.addCircuit();
         resistor1 = parallel.addResistor(4);
         resistor2 = parallel.addResistor(4);
 
-        printEverythingAboutIt(parallelWrapper);
-        printEverythingAboutIt(parallel);
+        //printEverythingAboutIt(parallelWrapper);
+        //printEverythingAboutIt(parallel);
         printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
         printEverythingAboutIt(resistor2);
@@ -50,7 +50,7 @@ public class Main {
         Resistor resistor3 = botParallel.addResistor(350);
         Resistor resistor4 = botParallel.addResistor(200);
 
-        printEverythingAboutIt(main);
+        printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
         printEverythingAboutIt(resistor2);
         printEverythingAboutIt(resistor3);
@@ -67,7 +67,7 @@ public class Main {
         resistor3 = rightSeries.addResistor(3);
         resistor4 = leftSeries.addResistor(4);
 
-        printEverythingAboutIt(main);
+        printEverythingAboutIt(battery);
         printEverythingAboutIt(resistor1);
         printEverythingAboutIt(resistor2);
         printEverythingAboutIt(resistor3);

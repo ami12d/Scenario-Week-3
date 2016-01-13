@@ -8,12 +8,10 @@ import java.util.List;
  */
 public abstract class Circuit extends Component {
     protected List<Component> components;
-    //private List<Wire> wires;
 
     public Circuit(Circuit parent) {
         super(0.0, parent);
         components = new ArrayList<>();
-        //wires = new ArrayList<>();
     }
 
     public Battery addBattery(double voltage) {
