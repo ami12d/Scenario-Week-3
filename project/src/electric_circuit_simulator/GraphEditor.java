@@ -100,7 +100,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/voltmeter.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/voltmeter.png",
-                        80, 80, "Voltmeter");
+                        80, 80, "0V"); 
         symbolsPalette
                 .addTemplate(
                         "Ammeter",
@@ -108,7 +108,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/ammeter.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/ammeter.png",
-                        80, 80, "Ammeter");
+                        80, 80, "0A");
         symbolsPalette
                 .addTemplate(
                         "Lamp",
@@ -116,7 +116,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/lamp.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/lamp.png",
-                        80, 80, "Lamp");
+                        80, 80, "Off");
         symbolsPalette
                 .addTemplate(
                         "Battery",
@@ -124,7 +124,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/battery.png")),
                         "rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png",
-                        80, 80, "Battery");
+                        80, 80, "10V");
         symbolsPalette
                 .addTemplate(
                         "Button",
@@ -132,7 +132,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/button.png")),
                         "rhombusImage;image=/com/mxgraph/examples/swing/images/button.png",
-                        80, 80, "Button");
+                        80, 80, "Off");
         symbolsPalette
                 .addTemplate(
                         "Motor",
@@ -140,7 +140,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/motor.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/motor.png",
-                        80, 80, "Motor");
+                        80, 80, "Off");
         symbolsPalette
                 .addTemplate(
                         "Open switch",
@@ -164,7 +164,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/variable_resistor.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png",
-                        80, 80, "Resistor");
+                        80, 80, "100 Ohms");
         symbolsPalette
                 .addTemplate(
                         "LED",
@@ -172,7 +172,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/led.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/led.png",
-                        80, 80, "LED");
+                        80, 80, "Off");
         symbolsPalette
                 .addTemplate(
                         "Fuse",
@@ -180,7 +180,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/fuse.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/fuse.png",
-                        80, 80, "Fuse");
+                        80, 80, "2A");
         symbolsPalette
                 .addTemplate(
                         "Buzzer",
@@ -188,7 +188,7 @@ public class GraphEditor extends BasicGraphEditor {
                                 GraphEditor.class
                                         .getResource("/com/mxgraph/examples/swing/images/buzzer.png")),
                         "roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png",
-                        80, 80, "Buzzer");
+                        80, 80, "Off");
 
         symbolsPalette
                 .addEdgeTemplate(
