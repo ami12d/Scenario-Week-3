@@ -46,36 +46,6 @@ public abstract class Circuit extends Component {
         return false;
     }
 
-    /*public Wire addWire() {
-        Wire wire = new Wire();
-        wires.add(wire);
-        return wire;
-    }
-
-    public Wire addWire(Component c, int direction) {
-        Wire wire = new Wire(c, direction);
-        wires.add(wire);
-        return wire;
-    }
-
-    public Wire addWire(Component prev, Component next) {
-        Wire wire = new Wire(prev, next);
-        wires.add(wire);
-        return wire;
-    }
-
-    public boolean removeWire(Wire wire) {
-        if(wires.contains(wire)) {
-            wires.remove(wire);
-            return true;
-        } else {
-            for(Circuit circuit : getSubCircuits()) {
-                if(circuit.removeWire(wire)) { return true; }
-            }
-        }
-        return false;
-    }*/
-
     private List<Circuit> getSubCircuits() {
         List<Circuit> circuits = new ArrayList<>();
         for(Component component : components){

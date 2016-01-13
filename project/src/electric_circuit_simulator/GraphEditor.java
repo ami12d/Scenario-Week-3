@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2006-2012, JGraph Ltd */
+ * Copyright (c) 2006-2012, JGraph Ltd
+ */
 package electric_circuit_simulator;
 
 import java.awt.Color;
@@ -38,431 +39,398 @@ import components.EditorPalette;
 import components.EditorMenuBar.AnalyzeGraph;
 import components.EditorMenuBar.AnalyzeType;
 
-public class GraphEditor extends BasicGraphEditor
-{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4601740824088314699L;
+public class GraphEditor extends BasicGraphEditor {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4601740824088314699L;
 
-	/**
-	 * Holds the shared number formatter.
-	 * 
-	 * @see NumberFormat#getInstance()
-	 */
-	public static final NumberFormat numberFormat = NumberFormat.getInstance();
+    /**
+     * Holds the shared number formatter.
+     *
+     * @see NumberFormat#getInstance()
+     */
+    public static final NumberFormat numberFormat = NumberFormat.getInstance();
 
-	/**
-	 * Holds the URL for the icon to be used as a handle for creating new
-	 * connections. This is currently unused.
-	 */
-	public static URL url = null;
+    /**
+     * Holds the URL for the icon to be used as a handle for creating new
+     * connections. This is currently unused.
+     */
+    public static URL url = null;
 
-	//GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/connector.gif");
+    //GraphEditor.class.getResource("/com/mxgraph/examples/swing/images/connector.gif");
 
-	public GraphEditor()
-	{
-		this("mxGraph Editor", new CustomGraphComponent(new CustomGraph()));
-	}
+    public GraphEditor() {
+        this("mxGraph Editor", new CustomGraphComponent(new CustomGraph()));
+    }
 
-	/**
-	 * 
-	 */
-	public GraphEditor(String appTitle, mxGraphComponent component)
-	{
-		super(appTitle, component);
-		final mxGraph graph = graphComponent.getGraph();
-		
-		// Creates the shapes palette
-		EditorPalette symbolsPalette = insertPalette(mxResources.get("symbols"));
+    /**
+     *
+     */
+    public GraphEditor(String appTitle, mxGraphComponent component) {
+        super(appTitle, component);
+        final mxGraph graph = graphComponent.getGraph();
 
-		// Sets the edge template to be used for creating new edges if an edge
-		// is clicked in the shape palette
-		symbolsPalette.addListener(mxEvent.SELECT, new mxIEventListener()
-		{
-			public void invoke(Object sender, mxEventObject evt)
-			{
-				Object tmp = evt.getProperty("transferable");
+        // Creates the shapes palette
+        EditorPalette symbolsPalette = insertPalette(mxResources.get("symbols"));
 
-				if (tmp instanceof mxGraphTransferable)
-				{
-					mxGraphTransferable t = (mxGraphTransferable) tmp;
-					Object cell = t.getCells()[0];
+        // Sets the edge template to be used for creating new edges if an edge
+        // is clicked in the shape palette
+        symbolsPalette.addListener(mxEvent.SELECT, new mxIEventListener() {
+            public void invoke(Object sender, mxEventObject evt) {
+                Object tmp = evt.getProperty("transferable");
 
-					if (graph.getModel().isEdge(cell))
-					{
-						((CustomGraph) graph).setEdgeTemplate(cell);
-					}
-				}
-			}
+                if (tmp instanceof mxGraphTransferable) {
+                    mxGraphTransferable t = (mxGraphTransferable) tmp;
+                    Object cell = t.getCells()[0];
 
-		});
+                    if (graph.getModel().isEdge(cell)) {
+                        ((CustomGraph) graph).setEdgeTemplate(cell);
+                    }
+                }
+            }
 
-		// Adds some template cells for dropping into the graph
-		symbolsPalette
-				.addTemplate(
-						"Voltmeter",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/voltmeter.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/voltmeter.png",
-						80, 80, "Voltmeter");
-		symbolsPalette
-				.addTemplate(
-						"Ammeter",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/ammeter.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/ammeter.png",
-						80, 80, "Ammeter");
-		symbolsPalette
-				.addTemplate(
-						"Lamp",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/lamp.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/lamp.png",
-						80, 80, "Lamp");
-		symbolsPalette
-				.addTemplate(
-						"Battery",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/battery.png")),
-						"rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png",
-						80, 80, "Battery");
-		symbolsPalette
-				.addTemplate(
-						"Button",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/button.png")),
-						"rhombusImage;image=/com/mxgraph/examples/swing/images/button.png",
-						80, 80, "Button");
-		symbolsPalette
-				.addTemplate(
-						"Motor",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/motor.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/motor.png",
-						80, 80, "Motor");
-		symbolsPalette
-				.addTemplate(
-						"Open switch",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/open_switch.png")),
-						"rhombusImage;image=/com/mxgraph/examples/swing/images/open_switch.png",
-						80, 80, "Open switch");
-		symbolsPalette
-				.addTemplate(
-						"Closed Switch",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/closed_switch.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/closed_switch.png",
-						80, 80, "Closed Switch");
-		symbolsPalette
-				.addTemplate(
-						"Resistor",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/variable_resistor.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png",
-						80, 80, "Resistor");
-		symbolsPalette
-				.addTemplate(
-						"LED",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/led.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/led.png",
-						80, 80, "LED");
-		symbolsPalette
-				.addTemplate(
-						"Fuse",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/fuse.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/fuse.png",
-						80, 80, "Fuse");
-		symbolsPalette
-				.addTemplate(
-						"Buzzer",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/buzzer.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png",
-						80, 80, "Buzzer");
-		
-		symbolsPalette
-		.addEdgeTemplate(
-				"Straight",
-				new ImageIcon(
-						GraphEditor.class
-								.getResource("/com/mxgraph/examples/swing/images/straight.png")),
-				"straight", 120, 120, "");
-		symbolsPalette
-				.addEdgeTemplate(
-						"Horizontal Connector",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/connect.png")),
-						null, 100, 100, "");
-		symbolsPalette
-				.addEdgeTemplate(
-						"Vertical Connector",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/vertical.png")),
-						"vertical", 100, 100, "");
-		symbolsPalette
-				.addEdgeTemplate(
-						"Entity Relation",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/entity.png")),
-						"entity", 100, 100, "");
+        });
 
-	}
+        // Adds some template cells for dropping into the graph
+        symbolsPalette
+                .addTemplate(
+                        "Voltmeter",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/voltmeter.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/voltmeter.png",
+                        80, 80, "Voltmeter");
+        symbolsPalette
+                .addTemplate(
+                        "Ammeter",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/ammeter.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/ammeter.png",
+                        80, 80, "Ammeter");
+        symbolsPalette
+                .addTemplate(
+                        "Lamp",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/lamp.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/lamp.png",
+                        80, 80, "Lamp");
+        symbolsPalette
+                .addTemplate(
+                        "Battery",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/battery.png")),
+                        "rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png",
+                        80, 80, "Battery");
+        symbolsPalette
+                .addTemplate(
+                        "Button",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/button.png")),
+                        "rhombusImage;image=/com/mxgraph/examples/swing/images/button.png",
+                        80, 80, "Button");
+        symbolsPalette
+                .addTemplate(
+                        "Motor",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/motor.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/motor.png",
+                        80, 80, "Motor");
+        symbolsPalette
+                .addTemplate(
+                        "Open switch",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/open_switch.png")),
+                        "rhombusImage;image=/com/mxgraph/examples/swing/images/open_switch.png",
+                        80, 80, "Open switch");
+        symbolsPalette
+                .addTemplate(
+                        "Closed Switch",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/closed_switch.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/closed_switch.png",
+                        80, 80, "Closed Switch");
+        symbolsPalette
+                .addTemplate(
+                        "Resistor",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/variable_resistor.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png",
+                        80, 80, "Resistor");
+        symbolsPalette
+                .addTemplate(
+                        "LED",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/led.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/led.png",
+                        80, 80, "LED");
+        symbolsPalette
+                .addTemplate(
+                        "Fuse",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/fuse.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/fuse.png",
+                        80, 80, "Fuse");
+        symbolsPalette
+                .addTemplate(
+                        "Buzzer",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/buzzer.png")),
+                        "roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png",
+                        80, 80, "Buzzer");
 
-	/**
-	 * 
-	 */
-	public static class CustomGraphComponent extends mxGraphComponent
-	{
+        symbolsPalette
+                .addEdgeTemplate(
+                        "Straight",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/straight.png")),
+                        "straight", 120, 120, "");
+        symbolsPalette
+                .addEdgeTemplate(
+                        "Horizontal Connector",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/connect.png")),
+                        null, 100, 100, "");
+        symbolsPalette
+                .addEdgeTemplate(
+                        "Vertical Connector",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/vertical.png")),
+                        "vertical", 100, 100, "");
+        symbolsPalette
+                .addEdgeTemplate(
+                        "Entity Relation",
+                        new ImageIcon(
+                                GraphEditor.class
+                                        .getResource("/com/mxgraph/examples/swing/images/entity.png")),
+                        "entity", 100, 100, "");
 
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -6833603133512882012L;
+    }
 
-		/**
-		 * 
-		 * @param graph
-		 */
-		public CustomGraphComponent(mxGraph graph)
-		{
-			super(graph);
+    /**
+     *
+     */
+    public static class CustomGraphComponent extends mxGraphComponent {
 
-			// Sets switches typically used in an editor
-			setPageVisible(true);
-			setGridVisible(true);
-			setToolTips(true);
-			getConnectionHandler().setCreateTarget(true);
+        /**
+         *
+         */
+        private static final long serialVersionUID = -6833603133512882012L;
 
-			// Loads the defalt stylesheet from an external file
-			mxCodec codec = new mxCodec();
-			Document doc = mxUtils.loadDocument(GraphEditor.class.getResource(
-					"/com/mxgraph/examples/swing/resources/default-style.xml")
-					.toString());
-			codec.decode(doc.getDocumentElement(), graph.getStylesheet());
+        /**
+         *
+         * @param graph
+         */
+        public CustomGraphComponent(mxGraph graph) {
+            super(graph);
 
-			// Sets the background to white
-			getViewport().setOpaque(true);
-			getViewport().setBackground(Color.WHITE);
-		}
+            // Sets switches typically used in an editor
+            setPageVisible(true);
+            setGridVisible(true);
+            setToolTips(true);
+            getConnectionHandler().setCreateTarget(true);
 
-		/**
-		 * Overrides drop behaviour to set the cell style if the target
-		 * is not a valid drop target and the cells are of the same
-		 * type (eg. both vertices or both edges). 
-		 */
-		public Object[] importCells(Object[] cells, double dx, double dy,
-				Object target, Point location)
-		{
-			if (target == null && cells.length == 1 && location != null)
-			{
-				target = getCellAt(location.x, location.y);
+            // Loads the defalt stylesheet from an external file
+            mxCodec codec = new mxCodec();
+            Document doc = mxUtils.loadDocument(GraphEditor.class.getResource(
+                    "/com/mxgraph/examples/swing/resources/default-style.xml")
+                    .toString());
+            codec.decode(doc.getDocumentElement(), graph.getStylesheet());
 
-				if (target instanceof mxICell && cells[0] instanceof mxICell)
-				{
-					mxICell targetCell = (mxICell) target;
-					mxICell dropCell = (mxICell) cells[0];
+            // Sets the background to white
+            getViewport().setOpaque(true);
+            getViewport().setBackground(Color.WHITE);
+        }
 
-					if (targetCell.isVertex() == dropCell.isVertex()
-							|| targetCell.isEdge() == dropCell.isEdge())
-					{
-						mxIGraphModel model = graph.getModel();
-						model.setStyle(target, model.getStyle(cells[0]));
-						graph.setSelectionCell(target);
+        /**
+         * Overrides drop behaviour to set the cell style if the target
+         * is not a valid drop target and the cells are of the same
+         * type (eg. both vertices or both edges).
+         */
+        public Object[] importCells(Object[] cells, double dx, double dy,
+                                    Object target, Point location) {
+            if (target == null && cells.length == 1 && location != null) {
+                target = getCellAt(location.x, location.y);
 
-						return null;
-					}
-				}
-			}
+                if (target instanceof mxICell && cells[0] instanceof mxICell) {
+                    mxICell targetCell = (mxICell) target;
+                    mxICell dropCell = (mxICell) cells[0];
 
-			return super.importCells(cells, dx, dy, target, location);
-		}
+                    if (targetCell.isVertex() == dropCell.isVertex()
+                            || targetCell.isEdge() == dropCell.isEdge()) {
+                        mxIGraphModel model = graph.getModel();
+                        model.setStyle(target, model.getStyle(cells[0]));
+                        graph.setSelectionCell(target);
 
-	}
+                        return null;
+                    }
+                }
+            }
 
-	/**
-	 * A graph that creates new edges from a given template edge.
-	 */
-	public static class CustomGraph extends mxGraph
-	{
-		/**
-		 * Holds the edge to be used as a template for inserting new edges.
-		 */
-		protected Object edgeTemplate;
+            return super.importCells(cells, dx, dy, target, location);
+        }
 
-		/**
-		 * Custom graph that defines the alternate edge style to be used when
-		 * the middle control point of edges is double clicked (flipped).
-		 */
-		public CustomGraph()
-		{
-			setAlternateEdgeStyle("edgeStyle=mxEdgeStyle.ElbowConnector;elbow=vertical");
-		}
+    }
 
-		/**
-		 * Sets the edge template to be used to inserting edges.
-		 */
-		public void setEdgeTemplate(Object template)
-		{
-			edgeTemplate = template;
-		}
+    /**
+     * A graph that creates new edges from a given template edge.
+     */
+    public static class CustomGraph extends mxGraph {
+        /**
+         * Holds the edge to be used as a template for inserting new edges.
+         */
+        protected Object edgeTemplate;
 
-		/**
-		 * Prints out some useful information about the cell in the tooltip.
-		 */
-		public String getToolTipForCell(Object cell)
-		{
-			String tip = "<html>";
-			mxGeometry geo = getModel().getGeometry(cell);
-			mxCellState state = getView().getState(cell);
+        /**
+         * Custom graph that defines the alternate edge style to be used when
+         * the middle control point of edges is double clicked (flipped).
+         */
+        public CustomGraph() {
+            setAlternateEdgeStyle("edgeStyle=mxEdgeStyle.ElbowConnector;elbow=vertical");
+        }
 
-			if (getModel().isEdge(cell))
-			{
-				tip += "points={";
+        /**
+         * Sets the edge template to be used to inserting edges.
+         */
+        public void setEdgeTemplate(Object template) {
+            edgeTemplate = template;
+        }
 
-				if (geo != null)
-				{
-					List<mxPoint> points = geo.getPoints();
+        /**
+         * Prints out some useful information about the cell in the tooltip.
+         */
+        public String getToolTipForCell(Object cell) {
+            String tip = "<html>";
+            mxGeometry geo = getModel().getGeometry(cell);
+            mxCellState state = getView().getState(cell);
 
-					if (points != null)
-					{
-						Iterator<mxPoint> it = points.iterator();
+            if (getModel().isEdge(cell)) {
+                tip += "points={";
 
-						while (it.hasNext())
-						{
-							mxPoint point = it.next();
-							tip += "[x=" + numberFormat.format(point.getX())
-									+ ",y=" + numberFormat.format(point.getY())
-									+ "],";
-						}
+                if (geo != null) {
+                    List<mxPoint> points = geo.getPoints();
 
-						tip = tip.substring(0, tip.length() - 1);
-					}
-				}
+                    if (points != null) {
+                        Iterator<mxPoint> it = points.iterator();
 
-				tip += "}<br>";
-				tip += "absPoints={";
+                        while (it.hasNext()) {
+                            mxPoint point = it.next();
+                            tip += "[x=" + numberFormat.format(point.getX())
+                                    + ",y=" + numberFormat.format(point.getY())
+                                    + "],";
+                        }
 
-				if (state != null)
-				{
+                        tip = tip.substring(0, tip.length() - 1);
+                    }
+                }
 
-					for (int i = 0; i < state.getAbsolutePointCount(); i++)
-					{
-						mxPoint point = state.getAbsolutePoint(i);
-						tip += "[x=" + numberFormat.format(point.getX())
-								+ ",y=" + numberFormat.format(point.getY())
-								+ "],";
-					}
+                tip += "}<br>";
+                tip += "absPoints={";
 
-					tip = tip.substring(0, tip.length() - 1);
-				}
+                if (state != null) {
 
-				tip += "}";
-			}
-			else
-			{
-				tip += "geo=[";
+                    for (int i = 0; i < state.getAbsolutePointCount(); i++) {
+                        mxPoint point = state.getAbsolutePoint(i);
+                        tip += "[x=" + numberFormat.format(point.getX())
+                                + ",y=" + numberFormat.format(point.getY())
+                                + "],";
+                    }
 
-				if (geo != null)
-				{
-					tip += "x=" + numberFormat.format(geo.getX()) + ",y="
-							+ numberFormat.format(geo.getY()) + ",width="
-							+ numberFormat.format(geo.getWidth()) + ",height="
-							+ numberFormat.format(geo.getHeight());
-				}
+                    tip = tip.substring(0, tip.length() - 1);
+                }
 
-				tip += "]<br>";
-				tip += "state=[";
+                tip += "}";
+            } else {
+                tip += "geo=[";
 
-				if (state != null)
-				{
-					tip += "x=" + numberFormat.format(state.getX()) + ",y="
-							+ numberFormat.format(state.getY()) + ",width="
-							+ numberFormat.format(state.getWidth())
-							+ ",height="
-							+ numberFormat.format(state.getHeight());
-				}
+                if (geo != null) {
+                    tip += "x=" + numberFormat.format(geo.getX()) + ",y="
+                            + numberFormat.format(geo.getY()) + ",width="
+                            + numberFormat.format(geo.getWidth()) + ",height="
+                            + numberFormat.format(geo.getHeight());
+                }
 
-				tip += "]";
-			}
+                tip += "]<br>";
+                tip += "state=[";
 
-			mxPoint trans = getView().getTranslate();
+                if (state != null) {
+                    tip += "x=" + numberFormat.format(state.getX()) + ",y="
+                            + numberFormat.format(state.getY()) + ",width="
+                            + numberFormat.format(state.getWidth())
+                            + ",height="
+                            + numberFormat.format(state.getHeight());
+                }
 
-			tip += "<br>scale=" + numberFormat.format(getView().getScale())
-					+ ", translate=[x=" + numberFormat.format(trans.getX())
-					+ ",y=" + numberFormat.format(trans.getY()) + "]";
-			tip += "</html>";
+                tip += "]";
+            }
 
-			return tip;
-		}
+            mxPoint trans = getView().getTranslate();
 
-		/**
-		 * Overrides the method to use the currently selected edge template for
-		 * new edges.
-		 * 
-		 * @param graph
-		 * @param parent
-		 * @param id
-		 * @param value
-		 * @param source
-		 * @param target
-		 * @param style
-		 * @return
-		 */
-		public Object createEdge(Object parent, String id, Object value,
-				Object source, Object target, String style)
-		{
-			if (edgeTemplate != null)
-			{
-				mxCell edge = (mxCell) cloneCells(new Object[] { edgeTemplate })[0];
-				edge.setId(id);
+            tip += "<br>scale=" + numberFormat.format(getView().getScale())
+                    + ", translate=[x=" + numberFormat.format(trans.getX())
+                    + ",y=" + numberFormat.format(trans.getY()) + "]";
+            tip += "</html>";
 
-				return edge;
-			}
+            return tip;
+        }
 
-			return super.createEdge(parent, id, value, source, target, style);
-		}
+        /**
+         * Overrides the method to use the currently selected edge template for
+         * new edges.
+         *
+         * @param graph
+         * @param parent
+         * @param id
+         * @param value
+         * @param source
+         * @param target
+         * @param style
+         * @return
+         */
+        public Object createEdge(Object parent, String id, Object value,
+                                 Object source, Object target, String style) {
+            if (edgeTemplate != null) {
+                mxCell edge = (mxCell) cloneCells(new Object[]{edgeTemplate})[0];
+                edge.setId(id);
 
-	}
+                return edge;
+            }
 
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch (Exception e1)
-		{
-			e1.printStackTrace();
-		}
+            return super.createEdge(parent, id, value, source, target, style);
+        }
 
-		mxSwingConstants.SHADOW_COLOR = Color.LIGHT_GRAY;
-		mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
+    }
 
-		GraphEditor editor = new GraphEditor();
-		editor.createFrame(new EditorMenuBar(editor)).setVisible(true);
-		
-	}
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+
+        mxSwingConstants.SHADOW_COLOR = Color.LIGHT_GRAY;
+        mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
+
+        GraphEditor editor = new GraphEditor();
+        editor.createFrame(new EditorMenuBar(editor)).setVisible(true);
+
+    }
 }
