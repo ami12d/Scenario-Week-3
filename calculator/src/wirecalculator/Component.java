@@ -7,9 +7,11 @@ public abstract class Component {
     private double resistance;
     private Wire prev;
     private Wire next;
+    private int id;
 
-    public Component(double resistance) {
+    public Component(double resistance, int id) {
         this.resistance = resistance;
+        this.id = id;
     }
 
     public double getVoltage() {
@@ -81,5 +83,9 @@ public abstract class Component {
 
     public void setNext(Wire next) {
         this.next = next;
+    }
+
+    public int getId() {
+        return id;
     }
 }

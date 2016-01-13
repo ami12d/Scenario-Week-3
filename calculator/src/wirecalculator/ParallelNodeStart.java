@@ -10,14 +10,14 @@ public class ParallelNodeStart extends Component {
 
     private List<Wire> nexts;
 
-    public ParallelNodeStart() {
-        super(0.0);
+    public ParallelNodeStart(int id) {
+        super(0.0, id);
         nexts = new ArrayList<>();
     }
 
     @Override
     public Component getNextComponent() {
-        //get the component after the end of the series circuit
+        //get the component after the end of the parallel circuit
         Component component = nexts.get(0).getNext();
         while(component.getClass() != ParallelNodeEnd.class) {
             component = component.getNextComponent();

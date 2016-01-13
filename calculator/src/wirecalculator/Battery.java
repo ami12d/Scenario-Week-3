@@ -6,13 +6,13 @@ package wirecalculator;
 public class Battery extends Component {
     private double voltage;
 
-    public Battery(double voltage) {
-        super(0.0);
+    public Battery(double voltage, int id) {
+        super(0.0, id);
         this.voltage = voltage;
     }
 
-    public Battery(double voltage, double resistance) {
-        super(resistance);
+    public Battery(double voltage, double resistance, int id) {
+        super(resistance, id);
         this.voltage = voltage;
     }
 

@@ -5,8 +5,8 @@ package wirecalculator;
  */
 public class Ammeter extends Component {
 
-    public Ammeter() {
-        super(0);
+    public Ammeter(int id) {
+        super(0.0, id);
     }
 
     @Override
