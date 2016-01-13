@@ -4,15 +4,20 @@
 package electric_circuit_simulator;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 import org.w3c.dom.Document;
+
+//import sun.awt.TracedEventQueue;
 
 import com.mxgraph.analysis.mxAnalysisGraph;
 import com.mxgraph.io.mxCodec;
@@ -425,7 +430,8 @@ public class GraphEditor extends BasicGraphEditor {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-
+        //EventQueue eventQueue = Toolkit.getDefaultToolkit().getSystemEventQueue();
+		//eventQueue.push(new TracedEventQueue());
         mxSwingConstants.SHADOW_COLOR = Color.LIGHT_GRAY;
         mxConstants.W3C_SHADOWCOLOR = "#D3D3D3";
 
