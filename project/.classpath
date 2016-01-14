@@ -2,6 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/Users/Amir/Downloads/jgraphx.jar"/>
+	<classpathentry kind="lib" path="lib/jgraphx.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/assertj-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/assertj-swing-3.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/uispec4j-2.5-RC1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
