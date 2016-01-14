@@ -15,9 +15,9 @@ public class Test {
         boolean checkV = component.getVoltage() == voltage;
         boolean checkI = component.getCurrent() == current;
         if(checkR && checkV && checkI) {
-            System.out.println("Component " + component.getId() + " with " + component.getClass() + " passed test");
+            System.out.println("Test passed");
         } else {
-            System.out.println("Component " + component.getId() + " with " + component.getClass() + " did not pass test");
+            System.out.println("Test failed");
         }
     }
 
@@ -32,9 +32,9 @@ public class Test {
         //Cannot remove components once added (has to re-parse everything every time user checks voltage/current)
 
         //Series circuit test
-        Battery battery = new Battery(10, getID());
-        Resistor resistor1 = new Resistor(2, getID());
-        Resistor resistor2 = new Resistor(3, getID());
+        Battery battery = new Battery(10);
+        Resistor resistor1 = new Resistor(2);
+        Resistor resistor2 = new Resistor(3);
         Wire wire1 = new Wire(battery, resistor1);
         Wire wire2 = new Wire(resistor1, resistor2);
         Wire wire3 = new Wire(resistor2, battery);
@@ -45,11 +45,11 @@ public class Test {
         System.out.println();
 
         //Parallel circuit test
-        battery = new Battery(10, getID());
-        ParallelNodeStart sns = new ParallelNodeStart(getID());
-        ParallelNodeEnd sne = new ParallelNodeEnd(getID());
-        resistor1 = new Resistor(4, getID());
-        resistor2 = new Resistor(4, getID());
+        battery = new Battery(10);
+        ParallelNodeStart sns = new ParallelNodeStart();
+        ParallelNodeEnd sne = new ParallelNodeEnd();
+        resistor1 = new Resistor(4);
+        resistor2 = new Resistor(4);
         wire1 = new Wire(battery, sns);
         wire2 = new Wire(sns, resistor1);
         wire3 = new Wire(sns, resistor2);
@@ -63,15 +63,15 @@ public class Test {
         System.out.println();
 
         //Series-Parallel circuit test
-        battery = new Battery(10, getID());
-        ParallelNodeStart sns1 = new ParallelNodeStart(getID());
-        ParallelNodeEnd sne1 = new ParallelNodeEnd(getID());
-        resistor1 = new Resistor(2, getID());
-        resistor2 = new Resistor(2, getID());
-        ParallelNodeStart sns2 = new ParallelNodeStart(getID());
-        ParallelNodeEnd sne2 = new ParallelNodeEnd(getID());
-        Resistor resistor3 = new Resistor(6, getID());
-        Resistor resistor4 = new Resistor(6, getID());
+        battery = new Battery(10);
+        ParallelNodeStart sns1 = new ParallelNodeStart();
+        ParallelNodeEnd sne1 = new ParallelNodeEnd();
+        resistor1 = new Resistor(2);
+        resistor2 = new Resistor(2);
+        ParallelNodeStart sns2 = new ParallelNodeStart();
+        ParallelNodeEnd sne2 = new ParallelNodeEnd();
+        Resistor resistor3 = new Resistor(6);
+        Resistor resistor4 = new Resistor(6);
         wire1 = new Wire(battery, sns1);
         wire2 = new Wire(sns1, resistor1);
         wire3 = new Wire(sns1, resistor2);
@@ -92,13 +92,13 @@ public class Test {
         System.out.println();
 
         //Parallel-Series circuit test
-        battery = new Battery(10, getID());
-        sns = new ParallelNodeStart(getID());
-        sne = new ParallelNodeEnd(getID());
-        resistor1 = new Resistor(1, getID());
-        resistor2 = new Resistor(2, getID());
-        resistor3 = new Resistor(3, getID());
-        resistor4 = new Resistor(4, getID());
+        battery = new Battery(10);
+        sns = new ParallelNodeStart();
+        sne = new ParallelNodeEnd();
+        resistor1 = new Resistor(1);
+        resistor2 = new Resistor(2);
+        resistor3 = new Resistor(3);
+        resistor4 = new Resistor(4);
         wire1 = new Wire(battery, sns);
         wire2 = new Wire(sns, resistor1);
         wire3 = new Wire(sns, resistor2);

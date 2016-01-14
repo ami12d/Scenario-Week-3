@@ -6,8 +6,8 @@ package wirecalculator;
 public class Battery extends Component {
     private double voltage;
 
-    public Battery(double voltage, int id) {
-        super(0.0, id);
+    public Battery(double voltage) {
+        super(0.0);
         this.voltage = voltage;
     }
 

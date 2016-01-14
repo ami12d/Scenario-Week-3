@@ -10,8 +10,8 @@ public class ParallelNodeStart extends Component {
 
     private List<Wire> nexts;
 
-    public ParallelNodeStart(int id) {
-        super(0.0, id);
+    public ParallelNodeStart() {
+        super(0.0);
         nexts = new ArrayList<>();
     }
 

@@ -5,7 +5,7 @@ package wirecalculator;
  */
 public class Resistor extends Component {
 
-    public Resistor(double resistance, int id) {
-        super(resistance, id);
+    public Resistor(double resistance) {
+        super(resistance);
     }
 }

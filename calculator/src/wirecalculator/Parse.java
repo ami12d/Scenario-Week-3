@@ -16,35 +16,35 @@ public class Parse {
             switch (component.getStyle()) {
                 case ("Battery"):
                     double voltage = Double.valueOf(component.getValue()); //parse the value
-                    components.put(component.getID(), new Battery(voltage, component.getID()));
+                    components.put(component.getID(), new Battery(voltage));
                     break;
                 case ("Resistor"):
                     double resistance1 = Double.valueOf(component.getValue()); //parse the value
-                    components.put(component.getID(), new Resistor(resistance1, component.getID()));
+                    components.put(component.getID(), new Resistor(resistance1));
                     break;
                 case ("ParallelNode"):
                     switch (component.getValue()) {
                         case ("Start"):
-                            components.put(component.getID(), new ParallelNodeStart(component.getID()));
+                            components.put(component.getID(), new ParallelNodeStart());
                             break;
                         case ("End"):
-                            components.put(component.getID(), new ParallelNodeEnd(component.getID()));
+                            components.put(component.getID(), new ParallelNodeEnd());
                             break;
                     }
                     break;
                 case ("Ammeter"):
-                    components.put(component.getID(), new Ammeter(component.getID()));
+                    components.put(component.getID(), new Ammeter());
                     break;
                 case ("Voltmeter"):
-                    components.put(component.getID(), new Voltmeter(component.getID()));
+                    components.put(component.getID(), new Voltmeter());
                     break;
                 case ("Lamp"):
                     Double resistance2 = Objects.equals(component.getValue(), "On") ? 12.0 : 0.0;
-                    components.put(component.getID(), new Resistor(resistance2, component.getID()));
+                    components.put(component.getID(), new Resistor(resistance2));
                     break;
                 case ("Motor"):
                     Double resistance3 = Objects.equals(component.getValue(), "On") ? 50.0 : 0.0;
-                    components.put(component.getID(), new Resistor(resistance3, component.getID()));
+                    components.put(component.getID(), new Resistor(resistance3));
                     break;
                 //etc.
             }
@@ -210,8 +210,8 @@ public class Parse {
         components.add(new ParsedComponent("ParallelNode", "Start", 8));
         components.add(new ParsedComponent("ParallelNode", "End", 9));
         wires.add(new ParsedWire(6, 1));
+        wires.add(new ParsedWire(9, 1));
         wires.add(new ParsedWire(6, 2));
-        wires.add(new ParsedWire(3, 6));
         wires.add(new ParsedWire(2, 7));
         wires.add(new ParsedWire(7, 3));
         wires.add(new ParsedWire(7, 8));
@@ -219,7 +219,7 @@ public class Parse {
         wires.add(new ParsedWire(8, 5));
         wires.add(new ParsedWire(4, 9));
         wires.add(new ParsedWire(9, 5));
-        wires.add(new ParsedWire(9, 1));
+        wires.add(new ParsedWire(3, 6));
         parse(components, wires);
     }
 }

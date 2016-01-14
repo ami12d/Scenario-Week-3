@@ -5,8 +5,8 @@ package wirecalculator;
  */
 public class Voltmeter extends Component {
 
-    public Voltmeter(int id) {
-        super(Double.POSITIVE_INFINITY, id);
+    public Voltmeter() {
+        super(Double.POSITIVE_INFINITY);
     }
 
     @Override
