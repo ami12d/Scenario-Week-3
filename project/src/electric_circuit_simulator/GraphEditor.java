@@ -63,7 +63,7 @@ public class GraphEditor extends BasicGraphEditor
 
 	public GraphEditor()
 	{
-		this("mxGraph Editor", new CustomGraphComponent(new CustomGraph()));
+		this("Team O Circuit Editor", new CustomGraphComponent(new CustomGraph()));
 	}
 
 	/**

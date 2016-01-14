@@ -217,11 +217,8 @@ public class EditorMenuBar extends JMenuBar {
 
 		menu.add(editor.bind(mxResources.get("actualSize"), mxGraphActions.getZoomActualAction()));
 
-		menu = add(new JMenu("Analyze"));
-		menu.add(editor.bind("Is Cyclic", new AnalyzeGraph(AnalyzeType.IS_CYCLIC_UNDIRECTED, aGraph)));
-		menu.add(editor.bind("Regularity", new AnalyzeGraph(AnalyzeType.REGULARITY, aGraph)));
-		menu.add(editor.bind("Get Components", new AnalyzeGraph(AnalyzeType.COMPONENTS, aGraph)));
-		menu.add(editor.bind("Check Validity", new AnalyzeGraph(AnalyzeType.IS_VALID, aGraph)));
+		menu = add(new JMenu("Analyse"));
+		menu.add(editor.bind("Process Circuit", new AnalyzeGraph(AnalyzeType.IS_VALID, aGraph)));
 	}
 
 	/**
