@@ -1,4 +1,4 @@
-package com.mxgraph.analysis;
+package analysis;
 
 import wirecalculator.ParsedComponent;
 import wirecalculator.ParsedWire;

@@ -116,14 +116,14 @@ public class GraphEditor extends BasicGraphEditor
 										.getResource("/com/mxgraph/examples/swing/images/ammeter.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/ammeter.png",
 						80, 80, "Ammeter");
-		symbolsPalette
+		/*symbolsPalette
 				.addTemplate(
 						"Lamp",
 						new ImageIcon(
 								GraphEditor.class
 										.getResource("/com/mxgraph/examples/swing/images/lamp.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/lamp.png",
-						80, 80, "Lamp");
+						80, 80, "Lamp");*/
 		symbolsPalette
 				.addTemplate(
 						"Battery",
@@ -131,8 +131,8 @@ public class GraphEditor extends BasicGraphEditor
 								GraphEditor.class
 										.getResource("/com/mxgraph/examples/swing/images/battery.png")),
 						"rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png",
-						80, 80, "Battery");
-		symbolsPalette
+						80, 80, "10 V");
+		/*symbolsPalette
 				.addTemplate(
 						"Button",
 						new ImageIcon(
@@ -163,16 +163,16 @@ public class GraphEditor extends BasicGraphEditor
 								GraphEditor.class
 										.getResource("/com/mxgraph/examples/swing/images/closed_switch.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/closed_switch.png",
-						80, 80, "Closed Switch");
+						80, 80, "Closed Switch");*/
 		symbolsPalette
 				.addTemplate(
 						"Resistor",
 						new ImageIcon(
 								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/variable_resistor.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png",
-						80, 80, "Resistor");
-		symbolsPalette
+										.getResource("/com/mxgraph/examples/swing/images/resistor.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/resistor.png",
+						80, 80, "5 Ohms");
+		/*symbolsPalette
 				.addTemplate(
 						"LED",
 						new ImageIcon(
@@ -195,8 +195,25 @@ public class GraphEditor extends BasicGraphEditor
 								GraphEditor.class
 										.getResource("/com/mxgraph/examples/swing/images/buzzer.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png",
-						80, 80, "Buzzer");
-		
+						80, 80, "Buzzer");*/
+		symbolsPalette
+				.addTemplate(
+						"Start Node (Parallel)",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/parallel_node_icon.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/parallel_node.png",
+						80, 80, "Start");
+		symbolsPalette
+				.addTemplate(
+						"End Node (Parallel)",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/parallel_node_icon.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/parallel_node.png",
+						80, 80, "End");
+
+
 		symbolsPalette
 		.addEdgeTemplate(
 				"Straight",
@@ -418,8 +435,7 @@ public class GraphEditor extends BasicGraphEditor
 		/**
 		 * Overrides the method to use the currently selected edge template for
 		 * new edges.
-		 * 
-		 * @param graph
+		 *
 		 * @param parent
 		 * @param id
 		 * @param value

@@ -5,26 +5,22 @@ package electric_circuit_simulator;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import analysis.ParseAll;
+import analysis.ParserData;
 import com.mxgraph.analysis.*;
 import com.mxgraph.costfunction.mxCostFunction;
 import com.mxgraph.io.mxCodec;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxIGraphModel;
-import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxXmlUtils;
-import com.mxgraph.util.png.mxPngEncodeParam;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraph.mxICellVisitor;
@@ -243,7 +239,6 @@ public class mxGraphStructure {
 
 	/**
 	 * @param aGraph
-	 * @param parent
 	 * @return true if the graph contains cycles regardless of edge direction
 	 */
 	public static boolean isCyclicUndirected(mxAnalysisGraph aGraph) {
@@ -346,7 +341,7 @@ public class mxGraphStructure {
 	};
 
 	/**
-	 * @param graph
+	 * @param aGraph
 	 * @param sourceVertex
 	 * @param targetVertex
 	 * @return Returns true if the two vertices are connected directly by an

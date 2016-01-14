@@ -15,14 +15,16 @@ public class Calculate {
         for (ParsedComponent component : parsedComponents) {
             switch (component.getStyle()) {
                 case ("rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png"):
-                    double voltage = Double.valueOf(component.getValue()); //calculate the value
+                    String value1 = component.getValue();
+                    double voltage = Double.valueOf(value1.substring(0, value1.length() - 2)); //calculate the value
                     components.put(component.getID(), new Battery(voltage));
                     break;
-                case ("roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png"):
-                    double resistance1 = Double.valueOf(component.getValue()); //calculate the value
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/resistor.png"):
+                    String value2 = component.getValue();
+                    double resistance1 = Double.valueOf(value2.substring(0, value2.length() - 5)); //calculate the value
                     components.put(component.getID(), new Resistor(resistance1));
                     break;
-                case ("ParallelNode"):
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/parallel_node.png"):
                     switch (component.getValue()) {
                         case ("Start"):
                             components.put(component.getID(), new ParallelNodeStart());
@@ -32,20 +34,20 @@ public class Calculate {
                             break;
                     }
                     break;
-                case ("Ammeter"):
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/ammeter.png"):
                     components.put(component.getID(), new Ammeter());
                     break;
-                case ("Voltmeter"):
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/voltmeter.png"):
                     components.put(component.getID(), new Voltmeter());
                     break;
-                case ("Lamp"):
+                /*case ("roundImage;image=/com/mxgraph/examples/swing/images/lamp.png"):
                     Double resistance2 = Objects.equals(component.getValue(), "On") ? 12.0 : 0.0;
                     components.put(component.getID(), new Resistor(resistance2));
                     break;
                 case ("Motor"):
                     Double resistance3 = Objects.equals(component.getValue(), "On") ? 50.0 : 0.0;
                     components.put(component.getID(), new Resistor(resistance3));
-                    break;
+                    break;*/
                 default:
                     System.out.println("Unknown style");
             }

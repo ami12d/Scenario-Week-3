@@ -1,5 +1,6 @@
-package com.mxgraph.analysis;
+package analysis;
 
+import com.mxgraph.analysis.mxAnalysisGraph;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
 
@@ -25,10 +26,5 @@ public class ParseAll {
 
         }
         return objects;
-    }
-
-    public static void main(String[] args) {
-        //ParserData results = printAll();
-        //calculate(results.getComponents(), results.getWires());
     }
 }
