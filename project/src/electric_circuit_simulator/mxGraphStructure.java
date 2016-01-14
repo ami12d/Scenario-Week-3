@@ -16,10 +16,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.mxgraph.analysis.StructuralException;
-import com.mxgraph.analysis.mxAnalysisGraph;
-import com.mxgraph.analysis.mxGraphProperties;
-import com.mxgraph.analysis.mxTraversal;
+import com.mxgraph.analysis.*;
 import com.mxgraph.costfunction.mxCostFunction;
 import com.mxgraph.io.mxCodec;
 import com.mxgraph.model.mxCell;
@@ -33,6 +30,7 @@ import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxGraph.mxICellVisitor;
 
 import com.mxgraph.view.mxGraphView;
+import wirecalculator.Calculate;
 
 
 public class mxGraphStructure {
@@ -68,15 +66,17 @@ public class mxGraphStructure {
 
 		JLabel label = new JLabel("My label");
 
-		if ((isConnected(aGraph) == true) 
-				&& (isCyclicUndirected(aGraph) == true) 
-				&& lowest != 0 && lowest != 1
-				&& hasBattery(aGraph)) {
+		if (isConnected(aGraph) && isCyclicUndirected(aGraph) && lowest != 0 && lowest != 1 && hasBattery(aGraph)) {
 			label.setText("Circuit is valid");
 			parent.add(label);
 
 			parent.pack();
 			parent.setVisible(true);
+
+			ParserData results = ParseAll.printAll(aGraph);
+			results.print();
+			Calculate.calculate(results.getComponents(), results.getWires());
+
 			return true;
 		}
 

@@ -14,11 +14,11 @@ public class Calculate {
         //create components and map them to their id
         for (ParsedComponent component : parsedComponents) {
             switch (component.getStyle()) {
-                case ("Battery"):
+                case ("rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png"):
                     double voltage = Double.valueOf(component.getValue()); //calculate the value
                     components.put(component.getID(), new Battery(voltage));
                     break;
-                case ("Resistor"):
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/variable_resistor.png"):
                     double resistance1 = Double.valueOf(component.getValue()); //calculate the value
                     components.put(component.getID(), new Resistor(resistance1));
                     break;
@@ -46,7 +46,8 @@ public class Calculate {
                     Double resistance3 = Objects.equals(component.getValue(), "On") ? 50.0 : 0.0;
                     components.put(component.getID(), new Resistor(resistance3));
                     break;
-                //etc.
+                default:
+                    System.out.println("Unknown style");
             }
         }
 
