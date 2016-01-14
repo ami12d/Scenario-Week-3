@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
+import javax.swing.border.Border;
 
 import analysis.ParseAll;
 import analysis.ParserData;
@@ -50,29 +50,38 @@ public class mxGraphStructure {
 		int lowest = getLowestDegreeVertex(aGraph, null);
 
 		mxGraph graph = aGraph.getGraph();
-		mxCodec codec = new mxCodec();
-		String xml = mxXmlUtils.getXml(codec.encode(graph.getModel()));
-		System.out.println(xml);
 
 		final JFrame parent = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - parent.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - parent.getHeight()) / 2);
 		parent.setLocation(x, y);
+		parent.setSize(1368, 750);
 
 		JLabel label = new JLabel("My label");
+		JPanel controlPanel = new JPanel();
+		Border padding = BorderFactory.createEmptyBorder(10,100,10,100);
+		controlPanel.setBorder(padding);
+		parent.setContentPane(controlPanel);
+		parent.setTitle("Results");
 
 		if (isConnected(aGraph) && isCyclicUndirected(aGraph) && lowest != 0 && lowest != 1 && hasBattery(aGraph)) {
-			label.setText("Circuit is valid");
-			parent.add(label);
-
-			parent.pack();
-			parent.setVisible(true);
+			String jFrameText = "";
+			jFrameText += ("<html>Circuit is valid <br><br>");
 
 			ParserData results = ParseAll.printAll(aGraph);
 			results.print();
-			Calculate.calculate(results.getComponents(), results.getWires());
+			List<String> toPopUp = Calculate.calculate(results.getComponents(), results.getWires());
 
+
+			for (String line: toPopUp ) {
+				jFrameText += (line + "<br>");
+			}
+			jFrameText += "</html>";
+			label.setText(jFrameText);
+			parent.add(label);
+			parent.pack();
+			parent.setVisible(true);
 			return true;
 		}
 

@@ -116,14 +116,6 @@ public class GraphEditor extends BasicGraphEditor
 										.getResource("/com/mxgraph/examples/swing/images/ammeter.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/ammeter.png",
 						80, 80, "Ammeter");
-		/*symbolsPalette
-				.addTemplate(
-						"Lamp",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/lamp.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/lamp.png",
-						80, 80, "Lamp");*/
 		symbolsPalette
 				.addTemplate(
 						"Battery",
@@ -132,38 +124,6 @@ public class GraphEditor extends BasicGraphEditor
 										.getResource("/com/mxgraph/examples/swing/images/battery.png")),
 						"rhombusImage;image=/com/mxgraph/examples/swing/images/battery.png",
 						80, 80, "10 V");
-		/*symbolsPalette
-				.addTemplate(
-						"Button",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/button.png")),
-						"rhombusImage;image=/com/mxgraph/examples/swing/images/button.png",
-						80, 80, "Button");
-		symbolsPalette
-				.addTemplate(
-						"Motor",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/motor.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/motor.png",
-						80, 80, "Motor");
-		symbolsPalette
-				.addTemplate(
-						"Open switch",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/open_switch.png")),
-						"rhombusImage;image=/com/mxgraph/examples/swing/images/open_switch.png",
-						80, 80, "Open switch");
-		symbolsPalette
-				.addTemplate(
-						"Closed Switch",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/closed_switch.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/closed_switch.png",
-						80, 80, "Closed Switch");*/
 		symbolsPalette
 				.addTemplate(
 						"Resistor",
@@ -172,30 +132,6 @@ public class GraphEditor extends BasicGraphEditor
 										.getResource("/com/mxgraph/examples/swing/images/resistor.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/resistor.png",
 						80, 80, "5 Ohms");
-		/*symbolsPalette
-				.addTemplate(
-						"LED",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/led.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/led.png",
-						80, 80, "LED");
-		symbolsPalette
-				.addTemplate(
-						"Fuse",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/fuse.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/fuse.png",
-						80, 80, "Fuse");
-		symbolsPalette
-				.addTemplate(
-						"Buzzer",
-						new ImageIcon(
-								GraphEditor.class
-										.getResource("/com/mxgraph/examples/swing/images/buzzer.png")),
-						"roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png",
-						80, 80, "Buzzer");*/
 		symbolsPalette
 				.addTemplate(
 						"Start Node (Parallel)",
@@ -212,6 +148,70 @@ public class GraphEditor extends BasicGraphEditor
 										.getResource("/com/mxgraph/examples/swing/images/parallel_node_icon.png")),
 						"roundImage;image=/com/mxgraph/examples/swing/images/parallel_node.png",
 						80, 80, "End");
+		symbolsPalette
+				.addTemplate(
+						"Lamp",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/lamp.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/lamp.png",
+						80, 80, "On");
+		symbolsPalette
+				.addTemplate(
+						"Motor",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/motor.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/motor.png",
+						80, 80, "On");
+		symbolsPalette
+				.addTemplate(
+						"Buzzer",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/buzzer.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png",
+						80, 80, "Buzzer");
+		/*symbolsPalette
+				.addTemplate(
+						"Button",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/button.png")),
+						"rhombusImage;image=/com/mxgraph/examples/swing/images/button.png",
+						80, 80, "Button");
+		symbolsPalette
+				.addTemplate(
+						"Open switch",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/open_switch.png")),
+						"rhombusImage;image=/com/mxgraph/examples/swing/images/open_switch.png",
+						80, 80, "Open switch");
+		symbolsPalette
+				.addTemplate(
+						"Closed Switch",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/closed_switch.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/closed_switch.png",
+						80, 80, "Closed Switch");*/
+		/*symbolsPalette
+				.addTemplate(
+						"LED",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/led.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/led.png",
+						80, 80, "LED");
+		symbolsPalette
+				.addTemplate(
+						"Fuse",
+						new ImageIcon(
+								GraphEditor.class
+										.getResource("/com/mxgraph/examples/swing/images/fuse.png")),
+						"roundImage;image=/com/mxgraph/examples/swing/images/fuse.png",
+						80, 80, "Fuse");*/
 
 
 		symbolsPalette

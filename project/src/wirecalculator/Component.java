@@ -35,6 +35,14 @@ public abstract class Component {
         return prev.getVoltage() * getResistance() / totalResistance;
     }
 
+    public double getResistance() {
+        return resistance;
+    }
+
+    public double getCurrent() {
+        return getVoltage() / getResistance();
+    }
+
     public double getTotalResistance() {
         //gets the total resistance of the series circuit the component is connected to.
         double totalResistance = getResistance();
@@ -65,14 +73,6 @@ public abstract class Component {
 
     public Component getNextComponent() {
         return next.getConnectedComponent(this);
-    }
-
-    public double getResistance() {
-        return resistance;
-    }
-
-    public double getCurrent() {
-        return getVoltage() / getResistance();
     }
 
     public void setPrev(Wire prev) {

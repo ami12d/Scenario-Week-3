@@ -40,14 +40,18 @@ public class Calculate {
                 case ("roundImage;image=/com/mxgraph/examples/swing/images/voltmeter.png"):
                     components.put(component.getID(), new Voltmeter());
                     break;
-                /*case ("roundImage;image=/com/mxgraph/examples/swing/images/lamp.png"):
-                    Double resistance2 = Objects.equals(component.getValue(), "On") ? 12.0 : 0.0;
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/lamp.png"):
+                    Double resistance2 = Objects.equals(component.getValue(), "On") ? 10.0 : 0.0;
                     components.put(component.getID(), new Resistor(resistance2));
                     break;
-                case ("Motor"):
-                    Double resistance3 = Objects.equals(component.getValue(), "On") ? 50.0 : 0.0;
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/motor.png"):
+                    Double resistance3 = Objects.equals(component.getValue(), "On") ? 10.0 : 0.0;
                     components.put(component.getID(), new Resistor(resistance3));
-                    break;*/
+                    break;
+                case ("roundImage;image=/com/mxgraph/examples/swing/images/buzzer.png"):
+                    Double resistance4 = Objects.equals(component.getValue(), "On") ? 10.0 : 0.0;
+                    components.put(component.getID(), new Resistor(resistance4));
+                    break;
                 default:
                     System.out.println("Unknown style");
             }
@@ -123,8 +127,11 @@ public class Calculate {
     }
 
     private static void printEverythingAboutIt(int componentID, Component component, List<String> printout) {
+        if(component.getClass() == ParallelNodeEnd.class || component.getClass() == ParallelNodeStart.class) {
+            return;
+        }
         printout.add("ID = " + String.valueOf(componentID));
-        printout.add(String.valueOf(component.getClass()));
+        printout.add("Type = " + String.valueOf(component.getClass()).substring(21));
         printout.add("Resistance = " + String.valueOf(component.getResistance()));
         printout.add("Voltage = " + String.valueOf(component.getVoltage()));
         printout.add("Current = " + String.valueOf(component.getCurrent()));
