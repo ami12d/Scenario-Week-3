@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Calculate {
 
-    public static void calculate(List<ParsedComponent> parsedComponents, List<ParsedWire> parsedWires) {
+    public static List<String> calculate(List<ParsedComponent> parsedComponents, List<ParsedWire> parsedWires) {
         HashMap<Integer, Component> components = new HashMap<>();
         List<Wire> wires = new ArrayList<>();
 
@@ -103,9 +103,14 @@ public class Calculate {
         }
 
         //print current/voltage info
+        List<String> printout = new ArrayList<>();
         for (int componentID : connected) {
-            printEverythingAboutIt(componentID, components.get(componentID));
+            printEverythingAboutIt(componentID, components.get(componentID), printout);
         }
+        for (String line : printout) {
+            System.out.println(line);
+        }
+        return printout;
     }
 
     private static int getBatteryID(HashMap<Integer, Component> components) {
@@ -117,13 +122,13 @@ public class Calculate {
         return -1; //should be unreachable
     }
 
-    private static void printEverythingAboutIt(int componentID, Component component) {
-        System.out.println("ID = " + componentID);
-        System.out.println(component.getClass());
-        System.out.println("Resistance = " + component.getResistance());
-        System.out.println("Voltage = " + component.getVoltage());
-        System.out.println("Current = " + component.getCurrent());
-        System.out.println();
+    private static void printEverythingAboutIt(int componentID, Component component, List<String> printout) {
+        printout.add("ID = " + String.valueOf(componentID));
+        printout.add(String.valueOf(component.getClass()));
+        printout.add("Resistance = " + String.valueOf(component.getResistance()));
+        printout.add("Voltage = " + String.valueOf(component.getVoltage()));
+        printout.add("Current = " + String.valueOf(component.getCurrent()));
+        printout.add("");
     }
 
     //test method
