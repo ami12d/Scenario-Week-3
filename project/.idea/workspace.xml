@@ -48,8 +48,8 @@
       <file leaf-file-name="mxCell.class" pinned="false" current-in-tab="true">
         <entry file="jar://$PROJECT_DIR$/lib/jgraphx.jar!/com/mxgraph/model/mxCell.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36320755">
-              <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.6485849">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -829,12 +829,12 @@
       <workItem from="1452637947644" duration="4357000" />
       <workItem from="1452688140889" duration="1880000" />
       <workItem from="1452719182233" duration="1643000" />
-      <workItem from="1452774795584" duration="102000" />
+      <workItem from="1452774795584" duration="168000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7982000" />
+    <option name="totallyTimeSpent" value="8048000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -1023,8 +1023,8 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/jgraphx.jar!/com/mxgraph/model/mxCell.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36320755">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.6485849">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
         </state>
       </provider>
