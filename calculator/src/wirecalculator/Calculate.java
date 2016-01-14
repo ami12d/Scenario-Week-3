@@ -5,9 +5,9 @@ import java.util.*;
 /**
  * Created by bagus maulana on 13/01/2016.
  */
-public class Parse {
+public class Calculate {
 
-    public static void parse(List<ParsedComponent> parsedComponents, List<ParsedWire> parsedWires) {
+    public static void calculate(List<ParsedComponent> parsedComponents, List<ParsedWire> parsedWires) {
         HashMap<Integer, Component> components = new HashMap<>();
         List<Wire> wires = new ArrayList<>();
 
@@ -15,11 +15,11 @@ public class Parse {
         for (ParsedComponent component : parsedComponents) {
             switch (component.getStyle()) {
                 case ("Battery"):
-                    double voltage = Double.valueOf(component.getValue()); //parse the value
+                    double voltage = Double.valueOf(component.getValue()); //calculate the value
                     components.put(component.getID(), new Battery(voltage));
                     break;
                 case ("Resistor"):
-                    double resistance1 = Double.valueOf(component.getValue()); //parse the value
+                    double resistance1 = Double.valueOf(component.getValue()); //calculate the value
                     components.put(component.getID(), new Resistor(resistance1));
                     break;
                 case ("ParallelNode"):
@@ -123,50 +123,6 @@ public class Parse {
         System.out.println();
     }
 
-    //dummy classes, actual class should be in Amir's part to sync later
-
-    private static class ParsedComponent {
-        private String style;
-        private String value;
-        private int id;
-
-        public ParsedComponent(String style, String value, int id) {
-            this.style = style;
-            this.value = value;
-            this.id = id;
-        }
-
-        public String getStyle() {
-            return style;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public int getID() {
-            return id;
-        }
-    }
-
-    private static class ParsedWire {
-        private int source;
-        private int target;
-
-        public ParsedWire(int source, int target){
-            this.source = source;
-            this.target = target;
-        }
-
-        public int getSource() {
-            return source;
-        }
-
-        public int getTarget() {
-            return target;
-        }
-    }
-
     //test method
 
     public static void main(String[] args) {
@@ -179,7 +135,7 @@ public class Parse {
         wires.add(new ParsedWire(1, 3));
         wires.add(new ParsedWire(1, 2));
         wires.add(new ParsedWire(3, 2));
-        parse(components, wires);
+        calculate(components, wires);
 
         //parallel
         components = new ArrayList<>();
@@ -195,7 +151,7 @@ public class Parse {
         wires.add(new ParsedWire(4, 2));
         wires.add(new ParsedWire(3, 4));
         wires.add(new ParsedWire(5, 1));
-        parse(components, wires);
+        calculate(components, wires);
 
         //series-parallel
         components = new ArrayList<>();
@@ -220,6 +176,6 @@ public class Parse {
         wires.add(new ParsedWire(4, 9));
         wires.add(new ParsedWire(9, 5));
         wires.add(new ParsedWire(3, 6));
-        parse(components, wires);
+        calculate(components, wires);
     }
 }

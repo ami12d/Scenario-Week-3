@@ -29,7 +29,7 @@ public class Test {
     public static void main(String[] args) {
         //Current limitations:
         //Can only have one battery
-        //Cannot remove components once added (has to re-parse everything every time user checks voltage/current)
+        //Cannot remove components once added (has to re-calculate everything every time user checks voltage/current)
 
         //Series circuit test
         Battery battery = new Battery(10);
