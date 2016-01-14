@@ -11,11 +11,6 @@ public class Battery extends Component {
         this.voltage = voltage;
     }
 
-    public Battery(double voltage, double resistance, int id) {
-        super(resistance, id);
-        this.voltage = voltage;
-    }
-
     @Override
     public double getVoltage() {
         return voltage;

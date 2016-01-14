@@ -10,19 +10,11 @@ import java.util.List;
 public class Test {
     private static int id = 0;
 
-    private static void printEverythingAboutIt(Component component) {
-        System.out.println(component.getClass());
-        System.out.println("Resistance = " + component.getResistance());
-        System.out.println("Voltage = " + component.getVoltage());
-        System.out.println("Current = " + component.getCurrent());
-        System.out.println();
-    }
-
     private static void assertEverythingAboutIt(Component component, double resistance, double voltage, double current) {
         boolean checkR = component.getResistance() == resistance;
         boolean checkV = component.getVoltage() == voltage;
         boolean checkI = component.getCurrent() == current;
-        if(component.getResistance() == resistance) {
+        if(checkR && checkV && checkI) {
             System.out.println("Component " + component.getId() + " with " + component.getClass() + " passed test");
         } else {
             System.out.println("Component " + component.getId() + " with " + component.getClass() + " did not pass test");
@@ -35,8 +27,6 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        //TODO change to testing classes (assertThat etc.)
-
         //Current limitations:
         //Can only have one battery
         //Cannot remove components once added (has to re-parse everything every time user checks voltage/current)

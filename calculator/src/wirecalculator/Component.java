@@ -39,7 +39,7 @@ public abstract class Component {
 
     public double getTotalResistance() {
         //gets the total resistance of the series circuit the component is connected to.
-        double totalResistance = resistance;
+        double totalResistance = getResistance();
         Component prev = getPreviousComponent();
         while(prev.getClass() != Battery.class && prev.getClass() != ParallelNodeStart.class ) {
             totalResistance += prev.getResistance();
