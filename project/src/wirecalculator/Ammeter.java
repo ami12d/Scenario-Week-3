@@ -11,6 +11,10 @@ public class Ammeter extends Component {
 
     @Override
     public double getCurrent() {
-        return getPreviousComponent().getCurrent();
+        Component prev = getPreviousComponent();
+        while(prev.getClass() != Battery.class && prev.getClass() != ParallelNodeStart.class) {
+            prev.getPreviousComponent();
+        }
+        return prev.getVoltage() / getTotalResistance();
     }
 }

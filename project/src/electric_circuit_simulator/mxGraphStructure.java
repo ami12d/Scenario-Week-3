@@ -47,10 +47,6 @@ public class mxGraphStructure {
 	 * @return true if the graph is connected
 	 */
 	public static boolean isValid(mxAnalysisGraph aGraph) {
-		int lowest = getLowestDegreeVertex(aGraph, null);
-
-		mxGraph graph = aGraph.getGraph();
-
 		final JFrame parent = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - parent.getWidth()) / 2);
@@ -65,7 +61,8 @@ public class mxGraphStructure {
 		parent.setContentPane(controlPanel);
 		parent.setTitle("Results");
 
-		if (isConnected(aGraph) && isCyclicUndirected(aGraph) && lowest != 0 && lowest != 1 && hasBattery(aGraph)) {
+		if (isConnected(aGraph) && isCyclicUndirected(aGraph) && getLowestDegreeVertex(aGraph, null) > 1 &&
+				hasBattery(aGraph)) {
 			String jFrameText = "";
 			jFrameText += ("<html>Circuit is valid <br><br>");
 
@@ -73,23 +70,24 @@ public class mxGraphStructure {
 			results.print();
 			List<String> toPopUp = Calculate.calculate(results.getComponents(), results.getWires());
 
-
 			for (String line: toPopUp ) {
 				jFrameText += (line + "<br>");
 			}
 			jFrameText += "</html>";
 			label.setText(jFrameText);
+
 			parent.add(label);
 			parent.pack();
 			parent.setVisible(true);
+
 			return true;
 		}
 
 		label.setText("Circuit is not valid");
 		parent.add(label);
-
 		parent.pack();
 		parent.setVisible(true);
+
 		return false;
 	}
 	
@@ -100,20 +98,19 @@ public class mxGraphStructure {
 		mxGraph graph = aGraph.getGraph();
 		Object parent = graph.getDefaultParent();
 		Object[] vertices = aGraph.getChildVertices(parent);
-		int vertexCount = vertices.length;
+		int batteries = 0;
 
-		for (int i = 0; i < vertexCount; i++)
-		{
-			mxCell currVertex = (mxCell) vertices[i];
-			if(currVertex.getStyle().contains("battery.png")){
-				return true;
+		for (Object vertice : vertices) {
+			mxCell currVertex = (mxCell) vertice;
+			if (currVertex.getStyle().contains("battery.png")) {
+				batteries++;
 			}
 		}
-		return false;
+
+		return batteries == 1;
 	};
 
-	
-	// READ THIS! i read complementaryGraph to help make me make hasBattery()
+
 	
 	public static void complementaryGraph(mxAnalysisGraph aGraph)
 	{
