@@ -1,5 +1,8 @@
 package wirecalculator;
 
+import analysis.ParsedComponent;
+import analysis.ParsedWire;
+
 import java.util.*;
 
 /**

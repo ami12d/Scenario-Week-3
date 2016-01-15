@@ -1,8 +1,5 @@
 package analysis;
 
-import wirecalculator.ParsedComponent;
-import wirecalculator.ParsedWire;
-
 import java.util.ArrayList;
 
 public class ParserData {

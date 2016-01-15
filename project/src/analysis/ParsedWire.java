@@ -1,4 +1,4 @@
-package wirecalculator;
+package analysis;
 
 /**
  * Created by bagus maulana on 14/01/2016.
